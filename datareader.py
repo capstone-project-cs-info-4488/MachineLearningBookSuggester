@@ -21,7 +21,12 @@ root = ET.fromstring(req.content)
 reviews = root[1]
 
 
-f = open(outputfilename, 'w')
+if os.path.exists(outputfilename):
+    append_write = 'a'
+else:
+    append_write = 'w'
+
+f = open(outputfilename, append_write)
 
 for review in reviews:
     user = None
