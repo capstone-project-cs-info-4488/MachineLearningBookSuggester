@@ -3,7 +3,6 @@ import java.io.FileReader;
 import java.util.ArrayList;
 
 public class Parser {
-	//How to deal with "uneven" data?
 	// key = E8TmwwqITCBMPCnFeE6Gg
 	Matrix associations;
 	ArrayList<String> ids = new ArrayList<String>();
