@@ -10,9 +10,6 @@ public class Node implements Cloneable {
 	double Confidence;
 	
 	
-//	 public Object clone() throws CloneNotSupportedException {
-//		    return super.clone();
-//	 }
 	public Node(String name, ArrayList<String> ids,ArrayList<String[]> shelves) {
 		Parent = null;
 		Ids = (ArrayList<String>)ids.clone();
@@ -91,6 +88,7 @@ public class Node implements Cloneable {
 	
 	//finds the relevant shelves
 	//Needs to be modified to include the parents
+	//Still not working
 	public int[] FindCommonIDs() {
 		ArrayList<Integer> returnIds = new ArrayList<Integer>();
 		
@@ -109,7 +107,7 @@ public class Node implements Cloneable {
 								Boolean found = false;
 								int[] parentIds = p.FindCommonIDs();
 								for (int k = 0; k < parentIds.length; k++) {
-									if(parentIds[k] == i) {
+									if(parentIds[k] == j) {
 										found = true;
 									}
 								}
@@ -128,8 +126,7 @@ public class Node implements Cloneable {
 							returnIds.add(i);
 						}
 					} catch (CloneNotSupportedException e) {
-						// TODO Auto-generated catch block
-						//e.printStackTrace();
+						e.printStackTrace();
 					}
 					 
 				}
