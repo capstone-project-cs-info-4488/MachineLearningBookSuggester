@@ -22,9 +22,10 @@ public class Node {
 		Ids = (ArrayList<String>)ids.clone();
 		Shelves = (ArrayList<String[]>)shelves.clone();
 		Name = name;
+		//The first id is the current id, doesn't need to be included
 		int idToRemove = ids.indexOf(Name);
-		if(idToRemove!= -1) {
-		Ids.remove(idToRemove);
+		if(idToRemove != -1) {
+			Ids.remove(idToRemove);
 		}
 		Support = support;
 		Parent = parent;
@@ -34,7 +35,7 @@ public class Node {
 		Prune(commonIds);
 	}
 	
-	
+	//Finds how many times a the book appears in the dataset
 	private int FindXCount() {
 		int count = 0;
 		for (int j = 0; j < Shelves.size(); j++) {
@@ -47,30 +48,29 @@ public class Node {
 		return count;
 	}
 	
+	//Builds the tree
 	private void FindAssociations(int xCount, int[] commonIds) {		
 		for (int i = 0; i < Ids.size(); i++) {
-			//if(!Ids.get(i).contains(Name)) {
-				int count = 0;
-				for (int j = 0; j < commonIds.length; j++) {
-					for (int j2 = 0; j2 < Shelves.get(commonIds[j]).length; j2++) {
-						if(Shelves.get(commonIds[j])[j2].contains(Ids.get(i))) {
-							count++;
-						}
+			int count = 0;
+			for (int j = 0; j < commonIds.length; j++) {
+				for (int j2 = 0; j2 < Shelves.get(commonIds[j]).length; j2++) {
+					if(Shelves.get(commonIds[j])[j2].contains(Ids.get(i))) {
+						count++;
 					}
 				}
-				ArrayList<String> ids2 = (ArrayList<String>)Ids.clone();
-				ids2.remove(i);
-				Children.add(new Node(Ids.get(i), ids2, Shelves, Support(count), this));
-			//}
+			}
+			ArrayList<String> ids2 = (ArrayList<String>)Ids.clone();
+			ids2.remove(i);
+			Children.add(new Node(Ids.get(i), ids2, Shelves, Support(count), this));
 		}
 		
 	}
 	
+	//finds the relevant shelves
 	public int[] FindCommonIDs() {
 		ArrayList<Integer> returnIds = new ArrayList<Integer>();
 		
 		for (int i = 0; i < Shelves.size(); i++) {
-			//Boolean notFound =true;
 			for (int j = 0; j < Shelves.get(i).length; j++) {
 				if(Shelves.get(i)[j].contains(Name)) {
 					returnIds.add(i);
@@ -84,11 +84,10 @@ public class Node {
 		return id;
 	}
 
-	//If nothing was pruned then stop recursing down the tree
+	//Prunes the tree
 	public void Prune(int[] commonIds) {
 		for (int i = 0; i < Children.size(); i++) {
-			if(Children.get(i).Support < .3) { //&& ShouldPrune(commonIds, i)) {
-				//PruneShelf(commonIds, i);
+			if(Children.get(i).Support < .3) { 
 				Children.remove(i);
 				i--;
 			}
@@ -96,33 +95,12 @@ public class Node {
 
 	}
 	
-	private void PruneShelf(int[] commonIds, int childIndex) {
-		for (int i = commonIds.length-1; i >=0 ; i--) {
-			for (int j = 0; j < Shelves.get(commonIds[i]).length; j++) {
-				if(Children.get(childIndex).Name.contains(Shelves.get(commonIds[i])[j])) {
-					Shelves.remove(commonIds[i]);
-					j = Shelves.size()+1;
-				}
-			}
-			
-		}
-	}
-	
-	private Boolean ShouldPrune(int[] commonIds, int childId) {
-		for (int i = 0; i < commonIds.length; i++) {
-			for (int j = 0; j < Shelves.get(commonIds[i]).length; j++) {
-				if(Children.get(childId).Name.contains(Shelves.get(commonIds[i])[j])) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
+	//Calculates the confidence
 	public double Confidence(int count, int xCount) {
 		return (double)count/(double)xCount;
 	}
 	
+	//Calculates the support
 	public double Support(int count) {
 		int size = Shelves.size();
 		double num = (double)count/(double)size;
