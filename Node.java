@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Node {
+public class Node implements Cloneable {
 	Node Parent;
 	ArrayList<Node> Children = new ArrayList<Node>();
 	String Name;
@@ -9,7 +9,12 @@ public class Node {
 	double Support;
 	double Confidence;
 	
+	
+//	 public Object clone() throws CloneNotSupportedException {
+//		    return super.clone();
+//	 }
 	public Node(String name, ArrayList<String> ids,ArrayList<String[]> shelves) {
+		Parent = null;
 		Ids = (ArrayList<String>)ids.clone();
 		Shelves = (ArrayList<String[]>)shelves.clone();
 		Name = name;
@@ -66,15 +71,69 @@ public class Node {
 		
 	}
 	
+	
+	private int FindLevels() {
+		int count = 0;
+		try {
+			if(Parent != null) {
+				Node p = (Node)Parent.clone();
+				while(p.Parent != null) {
+					count++;
+					p = p.Parent;
+				}
+			}
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
 	//finds the relevant shelves
+	//Needs to be modified to include the parents
 	public int[] FindCommonIDs() {
 		ArrayList<Integer> returnIds = new ArrayList<Integer>();
 		
 		for (int i = 0; i < Shelves.size(); i++) {
 			for (int j = 0; j < Shelves.get(i).length; j++) {
+
 				if(Shelves.get(i)[j].contains(Name)) {
-					returnIds.add(i);
+					int levels = FindLevels();
+					int count = 0;
+					Node p;
+					try {
+						if(Parent != null) {
+							p = (Node)Parent.clone();
+							Boolean keepGoing = true;
+							while(p.Parent != null && keepGoing == true) {
+								Boolean found = false;
+								int[] parentIds = p.FindCommonIDs();
+								for (int k = 0; k < parentIds.length; k++) {
+									if(parentIds[k] == i) {
+										found = true;
+									}
+								}
+								p = p.Parent;
+								
+								if(found == false) {
+									keepGoing = false;
+								}else {
+									count++;
+								}
+							}
+							if(count == levels) {
+								returnIds.add(i);
+							}
+						}else {
+							returnIds.add(i);
+						}
+					} catch (CloneNotSupportedException e) {
+						// TODO Auto-generated catch block
+						//e.printStackTrace();
+					}
+					 
 				}
+
 			}
 		}
 		int[] id = new int[returnIds.size()];
@@ -95,12 +154,11 @@ public class Node {
 
 	}
 	
-	//Calculates the confidence
+	
 	public double Confidence(int count, int xCount) {
 		return (double)count/(double)xCount;
 	}
 	
-	//Calculates the support
 	public double Support(int count) {
 		int size = Shelves.size();
 		double num = (double)count/(double)size;
