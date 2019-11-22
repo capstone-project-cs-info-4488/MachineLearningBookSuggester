@@ -13,7 +13,7 @@ public class Main {
 		
 		ArrayList<Node> nodes = new ArrayList<Node>();
 		
-		while(p.ids.size() >1) {
+		while(p.ids.size() >0) {
 			String name = p.ids.get(0);
 			p.ids.remove(0);
 			nodes.add(new Node(name, p.ids, p.shelves));
