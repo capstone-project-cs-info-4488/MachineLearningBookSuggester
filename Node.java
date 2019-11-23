@@ -8,7 +8,7 @@ public class Node implements Cloneable {
 	ArrayList<String[]> Shelves;
 	double Support;
 	double Confidence;
-	
+	ArrayList<String> Rules = new ArrayList<String>();
 	
 	public Node(String name, ArrayList<String> ids,ArrayList<String[]> shelves) {
 		Parent = null;
@@ -19,6 +19,7 @@ public class Node implements Cloneable {
 		int[] commonIds = FindCommonIDs();
 		FindAssociations(xcount, commonIds);
 		Prune(commonIds);
+		MakeRules();
 	}
 	public Node(String name, ArrayList<String> ids,ArrayList<String[]> shelves, double support, Node parent) {
 		Ids = (ArrayList<String>)ids.clone();
@@ -96,13 +97,12 @@ public class Node implements Cloneable {
 			for (int j = 0; j < Shelves.get(i).length; j++) {
 
 				if(Shelves.get(i)[j].contains(Name)) {
-					int levels = FindLevels();
-					int count = 0;
-					Node p;
 					try {
 						if(Parent != null) {
-							p = (Node)Parent.clone();
+							Node p = (Node)Parent.clone();
 							Boolean keepGoing = true;
+							int count = 0;
+							int levels = FindLevels();
 							while(p.Parent != null && keepGoing == true) {
 								Boolean found = false;
 								int[] parentIds = p.FindCommonIDs();
@@ -151,6 +151,53 @@ public class Node implements Cloneable {
 
 	}
 	
+	public void MakeRules() {
+		MakeRulesInner(this, Name);
+		FinishRules();
+	}
+	//adds the "beginning" parts of the rules
+	private void FinishRules() {
+		for (int i = 0; i < Rules.size(); i++) {
+			String s = Rules.get(i);
+			while(s.length() > 2) {
+				s = s.substring(0, s.length()-1);
+				Boolean addRule = true;
+				for (int j = 0; j < Rules.size(); j++) {
+					if(Rules.get(j).equals(s)) {
+						addRule = false;
+					}
+				}
+				if(addRule) {
+					Rules.add(s);
+				} 
+			}
+		}
+	}
+
+	//Makes the longest rules
+	private String MakeRulesInner(Node node, String current) {
+		String tempString = current;
+		for (int i = 0; i < node.Children.size(); i++) {
+			if(node.Children.get(i).Children.size()>0) {
+				//keep going
+				current = MakeRulesInner(node.Children.get(i), current);
+				Boolean addRule = true;
+				for (int j = 0; j < Rules.size(); j++) {
+					if(Rules.get(j).contains(current)) {
+						addRule = false;
+					}
+				}
+				if(addRule) {
+					Rules.add(current);
+				}
+				current = tempString;
+			}else {
+				//no reason to keep going down the tree
+				return current + node.Name + node.Children.get(i).Name;
+			}
+		}
+		return current + node.Name;
+	}
 	
 	public double Confidence(int count, int xCount) {
 		return (double)count/(double)xCount;
