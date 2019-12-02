@@ -1,30 +1,37 @@
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
-public class Node implements Cloneable {
+public class Node implements Cloneable, Serializable{
 	Node Parent;
 	ArrayList<Node> Children = new ArrayList<Node>();
 	String Name;
 	ArrayList<String> Ids;
 	ArrayList<String[]> Shelves;
 	double Support;
-	double Confidence;
 	ArrayList<String> Rules = new ArrayList<String>();
+	int Level;
 	
 	public Node(String name, ArrayList<String> ids,ArrayList<String[]> shelves) {
 		Parent = null;
 		Ids = (ArrayList<String>)ids.clone();
 		Shelves = (ArrayList<String[]>)shelves.clone();
 		Name = name;
+		Level = 0;
 		int xcount = FindXCount();
 		int[] commonIds = FindCommonIDs();
 		FindAssociations(xcount, commonIds);
 		Prune(commonIds);
 		MakeRules();
+		
 	}
-	public Node(String name, ArrayList<String> ids,ArrayList<String[]> shelves, double support, Node parent) {
+	public Node(String name, ArrayList<String> ids,ArrayList<String[]> shelves, double support, Node parent, int level) {
 		Ids = (ArrayList<String>)ids.clone();
 		Shelves = (ArrayList<String[]>)shelves.clone();
 		Name = name;
+		Level = level;
 		//The first id is the current id, doesn't need to be included
 		int idToRemove = ids.indexOf(Name);
 		if(idToRemove != -1) {
@@ -52,19 +59,26 @@ public class Node implements Cloneable {
 	}
 	
 	//Builds the tree
-	private void FindAssociations(int xCount, int[] commonIds) {		
+	//want to build a tree only 3 levels deep
+	private void FindAssociations(int xCount, int[] commonIds) {	
 		for (int i = 0; i < Ids.size(); i++) {
 			int count = 0;
 			for (int j = 0; j < commonIds.length; j++) {
 				for (int j2 = 0; j2 < Shelves.get(commonIds[j]).length; j2++) {
-					if(Shelves.get(commonIds[j])[j2].contains(Ids.get(i))) {
+					if(Shelves.get(commonIds[j])[j2].equals(Ids.get(i))) {
 						count++;
 					}
 				}
 			}
 			ArrayList<String> ids2 = (ArrayList<String>)Ids.clone();
 			ids2.remove(i);
-			Children.add(new Node(Ids.get(i), ids2, Shelves, Support(count), this));
+			if(Level +1 < 3) {
+				//System.out.println(Level);
+				Children.add(new Node(Ids.get(i), ids2, Shelves, Support(count), this, Level+1));
+				
+			}else {
+				return;
+			}
 		}
 		
 	}
@@ -143,7 +157,7 @@ public class Node implements Cloneable {
 	//Prunes the tree
 	public void Prune(int[] commonIds) {
 		for (int i = 0; i < Children.size(); i++) {
-			if(Children.get(i).Support < .3) { 
+			if(Children.get(i).Support < .001) { 
 				Children.remove(i);
 				i--;
 			}
@@ -152,6 +166,7 @@ public class Node implements Cloneable {
 	}
 	
 	public void MakeRules() {
+		//need to have a way to seperate each element of the rule, either by space or by comma or...
 		MakeRulesInner(this, Name);
 		FinishRules();
 	}
@@ -193,14 +208,10 @@ public class Node implements Cloneable {
 				current = tempString;
 			}else {
 				//no reason to keep going down the tree
-				return current + node.Name + node.Children.get(i).Name;
+				return current+"," + node.Name+"," + node.Children.get(i).Name;
 			}
 		}
-		return current + node.Name;
-	}
-	
-	public double Confidence(int count, int xCount) {
-		return (double)count/(double)xCount;
+		return current+"," + node.Name;
 	}
 	
 	public double Support(int count) {
@@ -208,4 +219,6 @@ public class Node implements Cloneable {
 		double num = (double)count/(double)size;
 		return num;
 	}
+	
+
 }
