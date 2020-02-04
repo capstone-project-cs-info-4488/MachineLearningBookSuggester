@@ -6,6 +6,15 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    testImplementation 'junit:junit:4.12'
     implementation project(':data-layer')
+    implementation 'org.slf4j:slf4j-api:1.7.25'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
+    testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.6.0'
+}
+
+test {
+    useJUnitPlatform()
 }
