@@ -1,8 +1,7 @@
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
+package edu.isu.capstone.bookrec.recommender;
+
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.logging.Level;
 
 public class Node implements Cloneable, Serializable{
 	Node Parent;

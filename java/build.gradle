@@ -1,0 +1,14 @@
+allprojects {
+    repositories {
+        jcenter()
+    }
+
+    group = "edu.isu.capstone.bookrec"
+
+}
+
+subprojects {
+    version = '1.0'
+}
+
+

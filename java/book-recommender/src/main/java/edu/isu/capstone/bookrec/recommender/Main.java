@@ -1,14 +1,12 @@
-import java.awt.print.Printable;
+package edu.isu.capstone.bookrec.recommender;
+
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import javax.naming.directory.InvalidSearchControlsException;
 
 public class Main {
 	
@@ -64,7 +62,7 @@ public class Main {
 			System.out.println("Finished node: "+p.ids.size() );
 		}
 		WriteToFile(nodes);
-		//ArrayList<Node> nodes = ReadFromFile();
+		//ArrayList<edu.isu.capstone.bookrec.recommender.Node> nodes = ReadFromFile();
 		System.out.print("Read from file");
 		
 		Scanner bookScanner = new Scanner(System.in);
