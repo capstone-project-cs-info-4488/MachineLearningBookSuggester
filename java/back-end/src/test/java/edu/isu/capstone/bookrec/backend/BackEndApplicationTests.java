@@ -1,10 +1,10 @@
-package edu.isu.capstone.bookrec.datalayer;
+package edu.isu.capstone.bookrec.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DataLayerApplicationTests {
+class BackEndApplicationTests {
 
     @Test
     void contextLoads() {

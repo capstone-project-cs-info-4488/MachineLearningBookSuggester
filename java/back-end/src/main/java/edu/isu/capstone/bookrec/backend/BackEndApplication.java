@@ -1,13 +1,13 @@
-package edu.isu.capstone.bookrec.datalayer;
+package edu.isu.capstone.bookrec.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DataLayerApplication {
+public class BackEndApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DataLayerApplication.class, args);
+        SpringApplication.run(BackEndApplication.class, args);
     }
 
 }
