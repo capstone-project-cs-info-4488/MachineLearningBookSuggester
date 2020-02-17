@@ -8,3 +8,8 @@ allprojects {
 }
 
 
+task build {
+    dependsOn ':book-recommender:build'
+    dependsOn ':back-end:build'
+    dependsOn ':android:build'
+}
