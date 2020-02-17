@@ -28,9 +28,8 @@ public class AuthenticationSuccessHandler implements org.springframework.securit
     protected String determineRedirectURL(Authentication authentication) {
         Object principal = authentication.getPrincipal();
         if (principal instanceof UserDetailsImpl) {
-            //Long id = ((UserDetailsImpl)principal).getId();
-            //return String.format("/user/%s", id);
-            return ""; //TODO: Modify this once Hibernate is installed and userdetails has been implemented
+            Long id = ((UserDetailsImpl)principal).getId();
+            return String.format("/user/%s", id); //TODO: Modify to correctly reflect current business logic
         } else {
             throw new IllegalStateException();
         }
