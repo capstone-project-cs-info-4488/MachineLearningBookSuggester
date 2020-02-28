@@ -1,13 +1,17 @@
 package edu.isu.capstone.bookrec.android;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.app.Activity;
 import android.text.Spanned;
+import android.view.View;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
+
+import edu.isu.capstone.bookrec.android.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,5 +28,10 @@ public class MainActivity extends AppCompatActivity {
 
         Hyperlink.setMovementMethod(LinkMovementMethod.getInstance());
         Hyperlink.setText(Text);
+    }
+
+    public void redirectToLogin(View v){
+        Intent i = new Intent(getBaseContext(), LoginActivity.class);
+        startActivity(i);
     }
 }
