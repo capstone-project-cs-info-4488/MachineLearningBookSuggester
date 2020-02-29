@@ -23,7 +23,6 @@ public class UserDetailsImpl implements UserDetails, Serializable {
     @JoinColumn(name = "id")
     @NotNull
     private User user;
-
     @Setter(AccessLevel.NONE)
     @Getter(AccessLevel.NONE)
     @Enumerated(value = EnumType.STRING)
