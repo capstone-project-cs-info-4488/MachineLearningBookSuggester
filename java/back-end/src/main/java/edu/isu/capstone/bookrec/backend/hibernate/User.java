@@ -13,4 +13,7 @@ public class User implements Serializable {
     private Long id;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, optional = false)
     private UserDetailsImpl userDetails = new UserDetailsImpl(this);
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "bookshelf_id", referencedColumnName = "id")
+    private BookShelf bookShelf;
 }

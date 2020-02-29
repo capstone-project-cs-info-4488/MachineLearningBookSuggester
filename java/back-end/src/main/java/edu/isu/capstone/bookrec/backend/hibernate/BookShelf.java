@@ -8,12 +8,17 @@ import java.util.Set;
 
 @Entity
 @Data
-public class Author {
+public class BookShelf {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @ManyToMany(mappedBy = "authors")
+    @OneToOne(mappedBy = "bookShelf")
+    private User user;
+    @ManyToMany
+    @JoinTable(
+            name = "Bookshelf_Books",
+            joinColumns = {@JoinColumn(name = "bookshelf_id")},
+            inverseJoinColumns = {@JoinColumn(name = "book_id")}
+    )
     private Set<Book> books = new HashSet<>();
-    private String firstName;
-    private String lastName;
 }

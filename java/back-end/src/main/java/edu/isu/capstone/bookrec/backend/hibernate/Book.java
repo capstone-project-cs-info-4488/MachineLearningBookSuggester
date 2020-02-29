@@ -34,4 +34,6 @@ public class Book implements Serializable {
     private String day;
     //TODO: create ENUM for languages
     private String language;
+    @ManyToMany(mappedBy = "books")
+    private Set<BookShelf> bookShelf;
 }
