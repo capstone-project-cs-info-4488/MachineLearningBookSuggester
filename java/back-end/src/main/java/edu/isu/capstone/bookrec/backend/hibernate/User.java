@@ -1,16 +1,13 @@
 package edu.isu.capstone.bookrec.backend.hibernate;
 
-import lombok.Data;
-
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 
-@Data
 @Entity
-public class User implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User extends BaseEntity implements Serializable {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, optional = false)
     private UserDetailsImpl userDetails = new UserDetailsImpl(this);
     @OneToOne(cascade = CascadeType.ALL)

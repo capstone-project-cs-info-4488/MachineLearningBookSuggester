@@ -1,18 +1,12 @@
 package edu.isu.capstone.bookrec.backend.hibernate;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Data
-public class Book implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class Book extends BaseEntity implements Serializable {
     private String title;
     private String isbn_10;
     private String isbn_13;

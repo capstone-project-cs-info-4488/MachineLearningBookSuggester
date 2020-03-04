@@ -12,15 +12,11 @@ import java.io.Serializable;
 import java.util.*;
 
 @Entity
-@Data
-public class UserDetailsImpl implements UserDetails, Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class UserDetailsImpl extends BaseEntity implements UserDetails, Serializable {
 
     @OneToOne
     @MapsId
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "user_id")
     @NotNull
     private User user;
     @Setter(AccessLevel.NONE)

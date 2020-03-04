@@ -1,12 +1,20 @@
 package edu.isu.capstone.bookrec.backend.controllers;
 
+import edu.isu.capstone.bookrec.backend.services.UserService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserController {
-    @RequestMapping("/login")
-    public void Login() {
 
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @RequestMapping("/login")
+    public String Login() {
+        return "";
     }
 }
