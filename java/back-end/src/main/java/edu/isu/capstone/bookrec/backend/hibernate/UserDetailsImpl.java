@@ -1,12 +1,14 @@
 package edu.isu.capstone.bookrec.backend.hibernate;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.*;
@@ -17,15 +19,15 @@ public class UserDetailsImpl extends BaseEntity implements UserDetails, Serializ
     @OneToOne
     @MapsId
     @JoinColumn(name = "user_id")
-    @NotNull
     private User user;
+    private String username;
+    private String password;
     @Setter(AccessLevel.NONE)
     @Getter(AccessLevel.NONE)
     @Enumerated(value = EnumType.STRING)
     @ElementCollection(targetClass = Roles.class)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role", nullable = false)
-    @NotEmpty
     private Set<Roles> roles;
 
     @Override
