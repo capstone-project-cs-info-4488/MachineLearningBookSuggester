@@ -3,6 +3,7 @@ package edu.isu.capstone.bookrec.backend.bootstrap;
 import edu.isu.capstone.bookrec.backend.hibernate.BookShelf;
 import edu.isu.capstone.bookrec.backend.hibernate.Roles;
 import edu.isu.capstone.bookrec.backend.hibernate.User;
+import edu.isu.capstone.bookrec.backend.hibernate.UserDetailsImpl;
 import edu.isu.capstone.bookrec.backend.services.BookShelfService;
 import edu.isu.capstone.bookrec.backend.services.UserService;
 import org.springframework.boot.CommandLineRunner;
@@ -30,9 +31,14 @@ public class DataLoader implements CommandLineRunner {
         //assign bookshelf to the user
         user.setBookShelf(bookShelf);
         //setup userDetails
-        user.getUserDetails().setUsername("user");
-        user.getUserDetails().grantAuthority(Roles.USER);
-        user.getUserDetails().setPassword("pass");
+        UserDetailsImpl userDetails = user.getUserDetails();
+        userDetails.setUsername("user");
+        userDetails.grantAuthority(Roles.USER);
+        userDetails.setPassword("pass");
+        userDetails.setCredentialsNonExpired(true);
+        userDetails.setAccountNonLocked(true);
+        userDetails.setAccountNonExpired(true);
+        userDetails.setEnabled(true);
         //save entities
         userService.save(user);
         bookShelfService.save(bookShelf);

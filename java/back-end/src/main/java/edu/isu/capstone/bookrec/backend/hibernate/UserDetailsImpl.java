@@ -9,11 +9,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.*;
 
 @Entity
+@Getter
+@Setter
 public class UserDetailsImpl extends BaseEntity implements UserDetails, Serializable {
 
     @OneToOne
@@ -21,42 +24,22 @@ public class UserDetailsImpl extends BaseEntity implements UserDetails, Serializ
     @JoinColumn(name = "user_id")
     @NotNull
     private User user;
-    @NotNull
-    @Setter
-    @Getter
+    @NotBlank
     private String username;
-    @Setter
-    @Getter
-    @NotNull
+    @NotBlank
     private String password;
+    @NotNull
     @Setter(AccessLevel.NONE)
     @Getter(AccessLevel.NONE)
     @Enumerated(value = EnumType.STRING)
     @ElementCollection(targetClass = Roles.class)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role", nullable = false)
-    @NotNull
     private Set<Roles> roles;
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
+    private boolean isEnabled;
+    private boolean isAccountNonExpired;
+    private boolean isAccountNonLocked;
+    private boolean isCredentialsNonExpired;
 
     public UserDetailsImpl() {
 
