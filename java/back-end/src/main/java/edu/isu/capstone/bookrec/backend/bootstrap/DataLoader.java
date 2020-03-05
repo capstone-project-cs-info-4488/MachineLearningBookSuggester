@@ -30,11 +30,12 @@ public class DataLoader implements CommandLineRunner {
         bookShelf.setUser(user);
         //assign bookshelf to the user
         user.setBookShelf(bookShelf);
+        //setup user
+        user.setUsername("user");
+        user.setPassword("pass");
         //setup userDetails
         UserDetailsImpl userDetails = user.getUserDetails();
-        userDetails.setUsername("user");
         userDetails.grantAuthority(Roles.USER);
-        userDetails.setPassword("pass");
         userDetails.setCredentialsNonExpired(true);
         userDetails.setAccountNonLocked(true);
         userDetails.setAccountNonExpired(true);

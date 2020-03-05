@@ -9,7 +9,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.*;
@@ -24,10 +23,6 @@ public class UserDetailsImpl extends BaseEntity implements UserDetails, Serializ
     @JoinColumn(name = "user_id")
     @NotNull
     private User user;
-    @NotBlank
-    private String username;
-    @NotBlank
-    private String password;
     @NotNull
     @Setter(AccessLevel.NONE)
     @Getter(AccessLevel.NONE)
@@ -40,6 +35,16 @@ public class UserDetailsImpl extends BaseEntity implements UserDetails, Serializ
     private boolean isAccountNonExpired;
     private boolean isAccountNonLocked;
     private boolean isCredentialsNonExpired;
+
+    @Override
+    public String getPassword() {
+        return user.getUsername();
+    }
+
+    @Override
+    public String getUsername() {
+        return user.getPassword();
+    }
 
     public UserDetailsImpl() {
 

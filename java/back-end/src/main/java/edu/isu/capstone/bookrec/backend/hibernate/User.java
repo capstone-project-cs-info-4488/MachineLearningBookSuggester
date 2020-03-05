@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Entity
@@ -19,4 +20,8 @@ public class User extends BaseEntity implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "bookshelf_id")}
     )
     private BookShelf bookShelf;
+    @NotBlank
+    private String username;
+    @NotBlank
+    private String password;
 }
