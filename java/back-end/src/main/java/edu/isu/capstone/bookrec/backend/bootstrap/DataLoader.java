@@ -1,6 +1,7 @@
 package edu.isu.capstone.bookrec.backend.bootstrap;
 
 import edu.isu.capstone.bookrec.backend.hibernate.BookShelf;
+import edu.isu.capstone.bookrec.backend.hibernate.Roles;
 import edu.isu.capstone.bookrec.backend.hibernate.User;
 import edu.isu.capstone.bookrec.backend.services.BookShelfService;
 import edu.isu.capstone.bookrec.backend.services.UserService;
@@ -28,6 +29,10 @@ public class DataLoader implements CommandLineRunner {
         bookShelf.setUser(user);
         //assign bookshelf to the user
         user.setBookShelf(bookShelf);
+        //setup userDetails
+        user.getUserDetails().setUsername("user");
+        user.getUserDetails().grantAuthority(Roles.USER);
+        user.getUserDetails().setPassword("pass");
         //save entities
         userService.save(user);
         bookShelfService.save(bookShelf);

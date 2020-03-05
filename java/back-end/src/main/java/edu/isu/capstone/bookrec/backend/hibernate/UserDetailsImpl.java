@@ -19,8 +19,15 @@ public class UserDetailsImpl extends BaseEntity implements UserDetails, Serializ
     @OneToOne
     @MapsId
     @JoinColumn(name = "user_id")
+    @NotNull
     private User user;
+    @NotNull
+    @Setter
+    @Getter
     private String username;
+    @Setter
+    @Getter
+    @NotNull
     private String password;
     @Setter(AccessLevel.NONE)
     @Getter(AccessLevel.NONE)
@@ -28,17 +35,8 @@ public class UserDetailsImpl extends BaseEntity implements UserDetails, Serializ
     @ElementCollection(targetClass = Roles.class)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role", nullable = false)
+    @NotNull
     private Set<Roles> roles;
-
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @Override
-    public String getUsername() {
-        return null;
-    }
 
     @Override
     public boolean isAccountNonExpired() {
