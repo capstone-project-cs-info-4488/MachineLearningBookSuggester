@@ -20,6 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic()
                 .and().authorizeRequests()
+                .antMatchers("/test").authenticated()
                 .antMatchers("/resources/**", "/css/**", "/js/**")
                 .permitAll()
                 .antMatchers("/**")
@@ -28,13 +29,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and().csrf()
                 .disable().headers().frameOptions().disable()
+                .and().formLogin()
                 .and().sessionManagement()
                 .maximumSessions(1)
                 .maxSessionsPreventsLogin(true);
     }
 
+    //TODO: Configure JPA Authentication
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().dataSource(dataSource);
+        auth.jdbcAuthentication()
+                .dataSource(dataSource);
     }
 }
