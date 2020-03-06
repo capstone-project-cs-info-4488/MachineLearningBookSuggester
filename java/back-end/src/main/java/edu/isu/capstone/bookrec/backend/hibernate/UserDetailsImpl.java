@@ -38,12 +38,12 @@ public class UserDetailsImpl extends BaseEntity implements UserDetails, Serializ
 
     @Override
     public String getPassword() {
-        return user.getUsername();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getPassword();
+        return user.getUsername();
     }
 
     public UserDetailsImpl() {

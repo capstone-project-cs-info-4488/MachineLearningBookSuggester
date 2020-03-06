@@ -1,7 +1,6 @@
 package edu.isu.capstone.bookrec.backend.services;
 
 import edu.isu.capstone.bookrec.backend.hibernate.User;
-import edu.isu.capstone.bookrec.backend.hibernate.UserDetailsImpl;
 import edu.isu.capstone.bookrec.backend.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService{
 
     private UserRepository userRepository;
 
@@ -21,8 +20,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findUserByUsername(username);
-        user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + username));
-        return user.map(UserDetailsImpl::new).get();
+        Optional<User> user = userRepository.findByUsernameIgnoreCase(username);
+        if (user.isPresent()) {
+            return user.get().getUserDetails();
+        }
+        throw new UsernameNotFoundException("Not found: " + username);
     }
 }

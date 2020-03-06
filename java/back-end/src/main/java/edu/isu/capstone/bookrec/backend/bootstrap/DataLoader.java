@@ -7,6 +7,7 @@ import edu.isu.capstone.bookrec.backend.hibernate.UserDetailsImpl;
 import edu.isu.capstone.bookrec.backend.services.BookShelfService;
 import edu.isu.capstone.bookrec.backend.services.UserService;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,10 +15,12 @@ public class DataLoader implements CommandLineRunner {
 
     private final UserService userService;
     private final BookShelfService bookShelfService;
+    private final PasswordEncoder passwordEncoder;
 
-    public DataLoader(UserService userService, BookShelfService bookShelfService) {
+    public DataLoader(UserService userService, BookShelfService bookShelfService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.bookShelfService = bookShelfService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -32,7 +35,7 @@ public class DataLoader implements CommandLineRunner {
         user.setBookShelf(bookShelf);
         //setup user
         user.setUsername("user");
-        user.setPassword("pass");
+        user.setPassword(passwordEncoder.encode("pass"));
         //setup userDetails
         UserDetailsImpl userDetails = user.getUserDetails();
         userDetails.grantAuthority(Roles.USER);
