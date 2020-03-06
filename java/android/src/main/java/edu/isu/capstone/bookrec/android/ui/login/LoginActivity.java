@@ -15,6 +15,8 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+
+import edu.isu.capstone.bookrec.android.Library;
 import edu.isu.capstone.bookrec.android.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -125,5 +127,10 @@ public class LoginActivity extends AppCompatActivity {
     public void btnRegister(View v) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.goodreads.com/user/sign_up"));
         startActivity(browserIntent);
+    }
+
+    public void btnGoToLibrary(View v){
+        Intent i = new Intent(this, Library.class);
+        startActivity(i);
     }
 }
