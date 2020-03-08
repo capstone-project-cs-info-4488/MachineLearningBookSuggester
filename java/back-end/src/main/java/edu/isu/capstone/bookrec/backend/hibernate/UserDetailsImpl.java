@@ -27,7 +27,7 @@ public class UserDetailsImpl extends BaseEntity implements UserDetails, Serializ
     @Setter(AccessLevel.NONE)
     @Getter(AccessLevel.NONE)
     @Enumerated(value = EnumType.STRING)
-    @ElementCollection(targetClass = Roles.class)
+    @ElementCollection(targetClass = Roles.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role", nullable = false)
     private Set<Roles> roles;
