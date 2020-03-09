@@ -11,11 +11,4 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
-    /*
-    @RequestMapping("/login")
-    public String Login() {
-        return "Login Page";
-    }
-     */
 }
