@@ -16,9 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import edu.isu.capstone.bookrec.android.Library;
 import edu.isu.capstone.bookrec.android.R;
-import edu.isu.capstone.bookrec.android.Recommendation;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -130,13 +128,4 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(browserIntent);
     }
 
-    public void btnGoToLibrary(View v){
-        Intent i = new Intent(this, Library.class);
-        startActivity(i);
-    }
-
-    public void btnGoToRec(View v){
-        Intent i = new Intent(this, Recommendation.class);
-        startActivity(i);
-    }
 }
