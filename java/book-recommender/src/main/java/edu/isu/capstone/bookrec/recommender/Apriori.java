@@ -1,7 +1,8 @@
 package edu.isu.capstone.bookrec.recommender;
 
+import java.util.*;
+
 import static java.util.Collections.emptyList;
-import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.*;
 
 public class Apriori {
