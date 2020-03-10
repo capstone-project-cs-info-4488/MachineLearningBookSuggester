@@ -7,7 +7,6 @@ allprojects {
     version = '0.0.1-SNAPSHOT'
 }
 
-
 task build {
     dependsOn ':book-recommender:build'
     dependsOn ':back-end:build'

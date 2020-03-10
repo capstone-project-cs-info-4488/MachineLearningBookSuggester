@@ -1,6 +1,5 @@
 package edu.isu.capstone.bookrec.recommender;
 
-import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -23,7 +22,7 @@ public class Main {
 //        System.out.print("Read from file");
 
         Scanner bookScanner = new Scanner(System.in);
-        System.out.println("Enter up to 2 books that you have liked to get a book reccomendation (space seperated): ");
+        System.out.println("Enter up to 2 books that you have liked to get a book recommendation (space separated): ");
         String books = bookScanner.nextLine();
         String[] booksArray = books.split(" ");
         List<String> booksList = Arrays.asList(booksArray);

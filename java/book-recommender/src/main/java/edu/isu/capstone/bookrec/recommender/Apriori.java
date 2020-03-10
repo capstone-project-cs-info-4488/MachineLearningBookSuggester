@@ -1,8 +1,7 @@
 package edu.isu.capstone.bookrec.recommender;
 
-import java.util.*;
-
 import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.*;
 
 public class Apriori {
@@ -14,23 +13,26 @@ public class Apriori {
      * @param minFrequency the minimum amount of input sets the data must be in
      */
     public static <T> Result<T> apriori(Collection<Set<T>> associations, int minFrequency) {
-        List<T> allFrequentItems = itemsWithMinFrequency(associations, minFrequency);
-
-        Set<List<T>> currentFrequentSubsets = allFrequentItems
-                .stream()
-                .map(Collections::singletonList)
-                .collect(toSet());
-
         Map<List<T>, Long> matchingSubsets = new HashMap<>();
 
-        while (currentFrequentSubsets.size() > 0) {
-            List<List<T>> newCandidates = generatePrunedCandidates(currentFrequentSubsets);
+        List<List<T>> candidates = associations
+                .stream()
+                .flatMap(Collection::stream)
+                .distinct()
+                .map(Collections::singletonList)
+                .collect(toList());
 
-            LinkedHashMap<List<T>, Long> candidatesFrequencies = countSubsetFrequencies(associations, newCandidates);
+        while (true) {
+            LinkedHashMap<List<T>, Long> candidatesFrequencies = countSubsetFrequencies(associations, candidates);
             candidatesFrequencies.values().removeIf(frequency -> frequency < minFrequency);
 
-            currentFrequentSubsets = candidatesFrequencies.keySet();
+            Set<List<T>> currentFrequentSubsets = candidatesFrequencies.keySet();
+            if (currentFrequentSubsets.size() == 0) {
+                break;
+            }
+
             matchingSubsets.putAll(candidatesFrequencies);
+            candidates = generatePrunedCandidates(currentFrequentSubsets);
         }
 
         return Result.fromListToLong(matchingSubsets);

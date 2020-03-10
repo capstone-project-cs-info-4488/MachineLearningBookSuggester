@@ -10,14 +10,16 @@
         android:id="@+id/scrLibrary"
         android:layout_width="342dp"
         android:layout_height="199dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="133dp">
+        app:layout_constraintTop_toBottomOf="@+id/txtLibraryTitle">
 
         <LinearLayout
             android:id="@+id/llLibrary"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
     </HorizontalScrollView>
 
     <TextView
@@ -43,7 +45,8 @@
         <LinearLayout
             android:id="@+id/llRecomendations"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
     </HorizontalScrollView>
 
     <TextView
@@ -61,12 +64,27 @@
         android:id="@+id/txtLibraryTitle"
         android:layout_width="64dp"
         android:layout_height="34dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="16dp"
         android:text="Library"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/scrLibrary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtHomeTitle" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintBottom_toTopOf="@+id/scrLibrary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtHomeTitle"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars[0]" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
