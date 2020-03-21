@@ -10,5 +10,4 @@
 rootProject.name = 'book-recommender-capstone-project'
 include 'book-recommender'
 include 'back-end'
-include 'data-layer'
 include 'android'
