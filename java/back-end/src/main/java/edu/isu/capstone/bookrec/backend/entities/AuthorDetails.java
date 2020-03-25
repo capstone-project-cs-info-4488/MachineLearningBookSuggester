@@ -12,4 +12,5 @@ public class AuthorDetails {
     private String middleName;
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
+    private String gender;
 }

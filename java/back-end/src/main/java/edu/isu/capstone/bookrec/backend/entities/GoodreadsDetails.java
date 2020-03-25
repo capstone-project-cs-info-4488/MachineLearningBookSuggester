@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -21,4 +22,13 @@ public class GoodreadsDetails {
     private String goodreadsUsername;
     @Transient
     private Set<Bookshelf> bookshelves;
+    @Temporal(TemporalType.DATE)
+    private Date lastActive;
+    @Temporal(TemporalType.DATE)
+    private Date joined;
+    private String Gender;
+    @Transient
+    private Set<Book> favoriteBooks;
+    @Transient
+    private Set<Author> favoriteAuthors;
 }

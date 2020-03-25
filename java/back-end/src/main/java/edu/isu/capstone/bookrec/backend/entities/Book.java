@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.Set;
 
+//TODO: create entitiy BookDetails
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -23,4 +25,10 @@ public class Book {
     private BookRating rating;
     @Transient
     private Set<Bookshelf> bookshelves;
+    private int numberOfPages;
+    @Transient
+    private Publisher publisher;
+    //TODO: create enum for this
+    private String language;
+    private String edition;
 }
