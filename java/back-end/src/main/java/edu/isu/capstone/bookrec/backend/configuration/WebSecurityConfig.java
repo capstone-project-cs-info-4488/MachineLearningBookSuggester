@@ -1,6 +1,5 @@
 package edu.isu.capstone.bookrec.backend.configuration;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,7 +16,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserDetailsService userService;
 
-    public WebSecurityConfig(@Qualifier("UserDetailsServiceImpl") UserDetailsService userService) {
+    public WebSecurityConfig(UserDetailsService userService) {
         this.userService = userService;
     }
 
