@@ -26,10 +26,12 @@ public class UserRepository  implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = userService.findUserByUsername(username);
-        Optional<UserDetailsImpl> userDetails =
-                userDetailsImplServive.findById(user.orElseThrow(
-                        () -> new UsernameNotFoundException("Username: " + username + " not found")).getId());
-        userDetails.get().setUser(user.get());
+        Optional<UserDetailsImpl> userDetails = userDetailsImplServive.findById(user.orElseThrow(
+                        () -> new UsernameNotFoundException("Username: " + username + " not found"))
+                        .getId());
+        userDetails.orElseThrow(
+                () -> new UsernameNotFoundException("Unable to retrieve user details"))
+                .setUser(user.get());
         return userDetails.get();
     }
 }
