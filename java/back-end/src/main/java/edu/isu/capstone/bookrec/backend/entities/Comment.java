@@ -11,6 +11,6 @@ public class Comment {
     @Transient
     private User user;
     private String comment;
-    @Temporal(TemporalType.TIMESTAMP)
+    //@Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime createdAt;
 }
