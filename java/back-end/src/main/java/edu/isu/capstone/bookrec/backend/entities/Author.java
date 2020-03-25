@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -18,6 +17,4 @@ public class Author {
     private AuthorDetails authorDetails;
     @Transient
     private Set<Book> books;
-    @Temporal(TemporalType.DATE)
-    private Date dateOfBirth;
 }

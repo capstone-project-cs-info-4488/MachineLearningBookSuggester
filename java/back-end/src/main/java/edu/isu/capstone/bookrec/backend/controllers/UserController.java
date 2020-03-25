@@ -13,6 +13,6 @@ public class UserController {
     }
     @GetMapping("/user/{userId}/bookshelf/{bookshelfId}")
     public String getUserBookshelf(@PathVariable Long userId, @PathVariable Long bookshelfId) {
-        throw  new NotImplementedException();
+        throw new NotImplementedException();
     }
 }
