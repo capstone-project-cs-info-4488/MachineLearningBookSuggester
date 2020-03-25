@@ -1,6 +1,6 @@
 package edu.isu.capstone.bookrec.backend.handlers;
 
-import edu.isu.capstone.bookrec.backend.hibernate.UserDetailsImpl;
+import edu.isu.capstone.bookrec.backend.entities.UserDetailsImpl;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
