@@ -26,13 +26,10 @@ public class UserRepository  implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = userService.findUserByUsername(username);
-        if (user.isPresent()) {
-            Long userId = user.get().getId();
-            System.out.println(userId);
-            Optional<UserDetailsImpl> userDetails = userDetailsImplServive.findById(userId);
-            System.out.println(userDetails.isPresent());
-            return userDetails.orElseThrow(() -> new UsernameNotFoundException("User is: " + userId + " not found!"));
-        }
-        throw new UsernameNotFoundException(String.format("Username: %s not found!", username));
+        Optional<UserDetailsImpl> userDetails =
+                userDetailsImplServive.findById(user.orElseThrow(
+                        () -> new UsernameNotFoundException("Username: " + username + " not found")).getId());
+        userDetails.get().setUser(user.get());
+        return userDetails.get();
     }
 }

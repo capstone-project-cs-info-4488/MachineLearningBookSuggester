@@ -30,10 +30,15 @@ public class DataLoader implements CommandLineRunner {
         //create test user details
         UserDetailsImpl userDetails = new UserDetailsImpl();
         userDetails.setUser(user);
-        //save entities
+        //save user
         userService.save(user);
-
+        //configure user details
         userDetails.setId(user.getId());
+        userDetails.setEnabled(true);
+        userDetails.setAccountNonExpired(true);
+        userDetails.setAccountNonLocked(true);
+        userDetails.setCredentialsNonExpired(true);
+        //save user details
         userDetailsImplService.save(userDetails);
     }
 }
