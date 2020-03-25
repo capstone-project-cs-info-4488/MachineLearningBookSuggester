@@ -6,19 +6,13 @@ import org.springframework.web.bind.annotation.RestController;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 @RestController
-public class BookController {
-    @GetMapping("/book/{id}")
-    public String getBookById(@PathVariable Long id) {
+public class AuthorController {
+    @GetMapping("/author/{id}")
+    public String getAuthorById(@PathVariable Long id) {
         throw new NotImplementedException();
     }
-
-    @GetMapping("/book/{title}")
-    public String getBookByTitle(@PathVariable String title) {
-        throw new NotImplementedException();
-    }
-
-    @GetMapping("/book/{isbn}")
-    public String getBookByIsbn(@PathVariable int isbn) {
+    @GetMapping("/author/{name}")
+    public String getAuthorByName(@PathVariable String name) {
         throw new NotImplementedException();
     }
 }
