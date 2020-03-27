@@ -36,7 +36,7 @@ public class Apriori {
             candidates = generatePrunedCandidates(currentFrequentSubsets);
         }
 
-        return Result.fromListToLong(matchingSubsets);
+        return Result.fromMapOfListToLong(matchingSubsets);
     }
 
     private static <T> LinkedHashMap<List<T>, Long> countSubsetFrequencies(Collection<Set<T>> associations, List<List<T>> subsets) {
@@ -169,7 +169,7 @@ public class Apriori {
             this.subsetToSupport = subsetToFrequency;
         }
 
-        static <T> Result<T> fromListToLong(Map<List<T>, Long> subsetToFrequency) {
+        static <T> Result<T> fromMapOfListToLong(Map<List<T>, Long> subsetToFrequency) {
             // Adjust the map to be in the right format.
             Map<Set<T>, Integer> adjusted = subsetToFrequency
                     .entrySet()

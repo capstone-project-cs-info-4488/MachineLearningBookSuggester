@@ -7,8 +7,11 @@ targetCompatibility = 1.8
 
 dependencies {
     implementation 'org.slf4j:slf4j-api:1.7.30'
+    // Used for nullability annotations.
+    implementation 'com.google.code.findbugs:jsr305:3.0.2'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.slf4j:slf4j-simple:1.7.30'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
 }

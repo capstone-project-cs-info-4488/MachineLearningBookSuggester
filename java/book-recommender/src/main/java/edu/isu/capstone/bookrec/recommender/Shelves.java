@@ -3,10 +3,7 @@ package edu.isu.capstone.bookrec.recommender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -33,15 +30,15 @@ public class Shelves {
         this.shelves = Collections.unmodifiableList(shelves);
     }
 
-    public static Shelves fromBooksFile(String path) throws IOException {
-        return fromBooksFile(new File(path));
+    public static Shelves fromFile(String path) throws IOException {
+        return fromFile(new File(path));
     }
 
-    public static Shelves fromBooksFile(File path) throws IOException {
+    public static Shelves fromDataStream(InputStream data) throws IOException {
         Set<String> ids = new HashSet<>();
         List<Shelf> shelves = new ArrayList<>();
 
-        try (FileReader input = new FileReader(path);
+        try (InputStreamReader input = new InputStreamReader(data);
              BufferedReader reader = new BufferedReader(input)
         ) {
             while (true) {
@@ -68,6 +65,12 @@ public class Shelves {
         } catch (IOException e) {
             logger.error("Failed to read shelves from book file", e);
             throw e;
+        }
+    }
+
+    public static Shelves fromFile(File path) throws IOException {
+        try (InputStream stream = new FileInputStream(path)) {
+            return fromDataStream(stream);
         }
     }
 
