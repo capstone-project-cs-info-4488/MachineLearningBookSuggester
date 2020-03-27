@@ -1,7 +1,9 @@
 package edu.isu.capstone.bookrec.backend.entities;
 
+import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -13,7 +15,9 @@ import java.util.Set;
 @NoArgsConstructor
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_generator")
+    @SequenceGenerator(name = "book_generator", sequenceName = "book_seq")
+    @Setter(value = AccessLevel.NONE)
     private long id;
     private String title;
     private String isbn;

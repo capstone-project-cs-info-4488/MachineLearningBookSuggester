@@ -1,8 +1,6 @@
 package edu.isu.capstone.bookrec.backend.entities;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -16,8 +14,8 @@ import java.util.Collections;
 @NoArgsConstructor
 public class UserDetailsImpl implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @Setter(value = AccessLevel.NONE)
     private Long id;
     @OneToOne(fetch = FetchType.EAGER)
     @MapsId
