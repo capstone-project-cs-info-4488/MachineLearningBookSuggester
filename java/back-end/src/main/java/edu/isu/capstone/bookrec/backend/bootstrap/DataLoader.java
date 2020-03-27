@@ -1,6 +1,5 @@
 package edu.isu.capstone.bookrec.backend.bootstrap;
 
-import edu.isu.capstone.bookrec.backend.entities.Review;
 import edu.isu.capstone.bookrec.backend.entities.User;
 import edu.isu.capstone.bookrec.backend.entities.UserDetailsImpl;
 import edu.isu.capstone.bookrec.backend.services.ReviewService;
@@ -46,10 +45,10 @@ public class DataLoader implements CommandLineRunner {
         user.setUserDetails(userDetails);
         userService.save(user);
 
-        //create review
-        Review review = new Review();
-        review.setUser(user);
-        reviewService.save(review);
-        System.out.println(review.getCreated());
+//        //create review
+//        Review review = new Review();
+//        review.setUser(user);
+//        reviewService.save(review);
+//        System.out.println(review.getCreated());
     }
 }

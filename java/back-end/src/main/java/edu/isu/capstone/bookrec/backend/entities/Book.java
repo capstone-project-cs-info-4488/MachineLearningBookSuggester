@@ -25,14 +25,17 @@ public class Book {
     private Set<Author> authors;
     @Transient
     private long avgRating;
-    @Transient
-    private BookRating rating;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "book")
+    private Set<BookRating> ratings;
     @Transient
     private Set<Bookshelf> bookshelves;
     private int numberOfPages;
-    @Transient
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "publisherId")
     private Publisher publisher;
     //TODO: create enum for this
     private String language;
     private String edition;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "book")
+    private Set<Review> reviews;
 }

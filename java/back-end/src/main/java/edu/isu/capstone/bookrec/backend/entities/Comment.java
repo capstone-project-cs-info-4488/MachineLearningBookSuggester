@@ -17,8 +17,9 @@ public class Comment {
     @SequenceGenerator(name = "comment_generator", sequenceName = "comment_seq")
     @Setter(value = AccessLevel.NONE)
     private long id;
-    @Transient
-    private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "goodreadsDetailsId")
+    private GoodreadsDetails goodreadsDetails;
     private String comment;
     //@Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime createdAt;

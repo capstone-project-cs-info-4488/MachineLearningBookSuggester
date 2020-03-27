@@ -17,8 +17,11 @@ public class Bookshelf {
     @SequenceGenerator(name = "bookshelf_generator", sequenceName = "bookshelf_seq")
     @Setter(value = AccessLevel.NONE)
     private long id;
-    @Transient
-    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "goodreadsId")
+    private GoodreadsDetails goodreadsDetails;
+
     @Transient
     private Set<Book> books;
     private String name;

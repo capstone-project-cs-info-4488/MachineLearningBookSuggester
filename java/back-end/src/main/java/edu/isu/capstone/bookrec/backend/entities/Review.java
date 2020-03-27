@@ -18,10 +18,14 @@ public class Review {
     @SequenceGenerator(name = "review_generator", sequenceName = "review_seq")
     @Setter(value = AccessLevel.NONE)
     private long id;
-    @Transient
-    private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "goodreadsDetailsId")
+    private GoodreadsDetails goodreadsDetails;
     @Temporal(TemporalType.DATE)
     @Column(updatable = false)
     @CreationTimestamp
     private Date created;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bookId")
+    private Book book;
 }

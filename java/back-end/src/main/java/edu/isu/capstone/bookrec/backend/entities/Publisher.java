@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Data
@@ -17,4 +18,6 @@ public class Publisher {
     @Setter(value = AccessLevel.NONE)
     private long id;
     private String name;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "publisher")
+    private Set<Book> books;
 }
