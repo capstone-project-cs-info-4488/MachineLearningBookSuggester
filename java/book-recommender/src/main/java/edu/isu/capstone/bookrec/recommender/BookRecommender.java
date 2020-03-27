@@ -16,7 +16,7 @@ import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class BookRecommender implements Serializable {
     public static final String TRAINING_DATA_LOCATION = "trainingData.txt";
-    public static final int DEFAULT_MIN_SUPPORT = 10;
+    public static final int DEFAULT_MIN_SUPPORT = 2;
     private static final Logger logger = LoggerFactory.getLogger(BookRecommender.class);
 
     private final Map<Set<String>, Integer> shelfSupports;
