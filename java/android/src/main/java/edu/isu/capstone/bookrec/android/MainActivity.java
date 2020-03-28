@@ -27,32 +27,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
         LinearLayout layout = findViewById(R.id.llLibrary);
 
-//        AsyncTask<Void, Void, Bitmap> retrieveImage = new AsyncTask<Void, Void, Bitmap>() {
-//            @Override
-//            protected Bitmap doInBackground(Void... voids) {
-//                return null;
-//            }
-//        }
-
-//        for (int i = 0; i <5; i++){
-//            ImageView img = new ImageView(this);
-//            img.setLayoutParams(new android.view.ViewGroup.LayoutParams(10, 10));
-//            img.setMaxHeight(20);
-//            img.setMaxWidth(20);
-//
-//            Picasso.get().load("http://therecipehound.com/css/Logo.png").into(img);
-////            URL url = null;
-////            try {
-////                url = new URL("https://ih0.redbubble.net/image.161080070.3717/flat,750x1000,075,f.jpg");
-////                InputStream in = url.openConnection().getInputStream();
-////                Bitmap bmp = BitmapFactory.decodeStream(in);
-////                img.setImageBitmap(bmp);
-////            } catch (IOException e) {
-////                e.printStackTrace();
-////            }
-//
-//            layout.addView(img);
-//        }
     }
 
 }
