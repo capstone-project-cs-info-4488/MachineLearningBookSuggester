@@ -44,7 +44,7 @@ public class DashboardFragment extends Fragment {
 
     //Populates an arraylist of imageviews to be used to populate the library grid
     private void CreateLibraryImages(View root){
-        //numBooks will need to reflect how many books are in the user's library
+        //TODO numBooks will need to reflect how many books are in the user's library
         int numBooksLib = 10;
 
         ArrayList<ImageView> images = new ArrayList<>();
@@ -59,7 +59,7 @@ public class DashboardFragment extends Fragment {
             img.setMaxHeight(400);
             img.setMaxWidth(300);
             //url to load into image
-            //How to change url for each unique book? Load array with urls? Where do you get the urls?
+            //TODO How to change url for each unique book? Load array with urls? Where do you get the urls?
             Picasso.get().load("https://i.imgur.com/aEggkZr.jpg").placeholder(R.mipmap.ic_launcher).into(img);
             //populate images array with imageviews
             images.add(img);
