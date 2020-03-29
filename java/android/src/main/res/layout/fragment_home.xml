@@ -51,8 +51,8 @@
 
     <TextView
         android:id="@+id/txtRecomendationsTitle"
-        android:layout_width="217dp"
-        android:layout_height="31dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/recommendations"
         android:textSize="24sp"
@@ -62,8 +62,8 @@
 
     <TextView
         android:id="@+id/txtLibraryTitle"
-        android:layout_width="75dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/library"
         android:textSize="24sp"

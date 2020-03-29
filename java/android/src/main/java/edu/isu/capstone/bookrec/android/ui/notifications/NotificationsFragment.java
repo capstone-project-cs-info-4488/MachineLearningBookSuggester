@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import edu.isu.capstone.bookrec.android.MainActivity;
 import edu.isu.capstone.bookrec.android.R;
 import edu.isu.capstone.bookrec.android.ui.BooksGridAdapter;
 
@@ -25,6 +26,9 @@ public class NotificationsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
+        //Sets Title
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("My Recommendations");
+        //Creates images
         CreateRecomImages(root);
 
         return root;

@@ -22,6 +22,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import edu.isu.capstone.bookrec.android.MainActivity;
 import edu.isu.capstone.bookrec.android.R;
 import edu.isu.capstone.bookrec.android.ui.BooksGridAdapter;
 
@@ -35,7 +36,8 @@ public class DashboardFragment extends Fragment {
         //NOTE: "R.layout.fragment_dashboard" will need to be changed depending on which view you are working on.
         //For example, if you were on the notifications fragment, it would be "R.layout.fragment_notifications"
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-
+        //Sets Title
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("My Library");
         //Creates an arraylist of images to be used to fill the grid.
         CreateLibraryImages(root);
 
