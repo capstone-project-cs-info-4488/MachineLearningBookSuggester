@@ -1,12 +1,13 @@
 package edu.isu.capstone.bookrec.backend.configuration;
-
-import edu.isu.capstone.bookrec.recommender.BookRecommender;
+import edu.isu.capstone.bookrec.backend.entities.BookRecommender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
+
+;
 
 @Configuration
 public class BookRecommenderConfig {

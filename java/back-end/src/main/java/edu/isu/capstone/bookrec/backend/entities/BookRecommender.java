@@ -10,4 +10,7 @@ public class BookRecommender {
     public String recommendBook(Set<String> bookIds) {
         throw new NotImplementedException();
     }
+    public static BookRecommender createDefault() {
+        return new BookRecommender();
+    }
 }
