@@ -3,6 +3,7 @@ package edu.isu.capstone.bookrec.recommender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -56,8 +57,9 @@ public class BookRecommender implements Serializable {
     public static BookRecommender createDefault() throws IOException {
         try (InputStream data = getSystemResourceAsStream(TRAINING_DATA_LOCATION)) {
             if (data == null) {
-                logger.error("Unable to find training data.");
-                return null;
+                String errStr = String.format("Unable to find training data. Searched for the resource: %s", TRAINING_DATA_LOCATION);
+                logger.error(errStr);
+                throw new FileNotFoundException(errStr);
             }
             return create(data, DEFAULT_MIN_SUPPORT);
         }
