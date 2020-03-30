@@ -1,8 +1,8 @@
 package edu.isu.capstone.bookrec.backend.services;
 
 import edu.isu.capstone.bookrec.backend.entities.Book;
+import edu.isu.capstone.bookrec.backend.entities.BookRecommender;
 import edu.isu.capstone.bookrec.backend.repositories.BookshelfRepository;
-import edu.isu.capstone.bookrec.recommender.BookRecommender;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
