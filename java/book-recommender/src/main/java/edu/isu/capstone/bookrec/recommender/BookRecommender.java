@@ -3,7 +3,6 @@ package edu.isu.capstone.bookrec.recommender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -53,7 +52,7 @@ public class BookRecommender implements Serializable {
      * @return The default book recommender.
      * @throws IOException If there are problems finding the data.
      */
-    @Nullable
+
     public static BookRecommender createDefault() throws IOException {
         try (InputStream data = getSystemResourceAsStream(TRAINING_DATA_LOCATION)) {
             if (data == null) {
@@ -70,7 +69,7 @@ public class BookRecommender implements Serializable {
      * @param shelf a list of book ids.
      * @return the book id of the book to recommend. Returns null if the learned data has no relationship to the shelf.
      */
-    @Nullable
+
     public String recommendBook(Set<String> shelf) {
         // NOTE THAT THIS IS EXTREMELY INEFFICIENT AND NOT CURRENTLY SCALABLE
         String bestBook = null;
