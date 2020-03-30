@@ -15,8 +15,6 @@ import java.util.Set;
 import static java.lang.ClassLoader.getSystemResourceAsStream;
 
 public class BookRecommender implements Serializable {
-    public static final String TRAINING_DATA_LOCATION = "trainingData.txt";
-    public static final int DEFAULT_MIN_SUPPORT = 2;
     private static final Logger logger = LoggerFactory.getLogger(BookRecommender.class);
 
     private final Map<Set<String>, Integer> shelfSupports;
@@ -48,20 +46,21 @@ public class BookRecommender implements Serializable {
 
     /**
      * Creates the default book recommender by looking for the training data as a resource identified by
-     * TRAINING_DATA_LOCATION.
+     * trainingDataLocation.
      *
+     * @param trainingDataLocation The location to look for the training data.
+     * @param minSupport           The minimum support used in the model.
      * @return The default book recommender.
      * @throws IOException If there are problems finding the data.
      */
-
-    public static BookRecommender createDefault() throws IOException {
-        try (InputStream data = getSystemResourceAsStream(TRAINING_DATA_LOCATION)) {
+    public static BookRecommender createFromResourcePath(String trainingDataLocation, int minSupport) throws IOException {
+        try (InputStream data = getSystemResourceAsStream(trainingDataLocation)) {
             if (data == null) {
-                String errStr = String.format("Unable to find training data. Searched for the resource: %s", TRAINING_DATA_LOCATION);
+                String errStr = String.format("Unable to find training data. Searched for the resource: %s", trainingDataLocation);
                 logger.error(errStr);
                 throw new FileNotFoundException(errStr);
             }
-            return create(data, DEFAULT_MIN_SUPPORT);
+            return create(data, minSupport);
         }
     }
 
