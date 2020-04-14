@@ -7,6 +7,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import edu.isu.capstone.bookrec.android.data.model.LoggedInUser;
 
 public class LoggedInUserFetcher {
@@ -18,29 +21,31 @@ public class LoggedInUserFetcher {
         url = url_to_fetch;
     }
 
-    public LoggedInUser getUser() {
+    public void getUser(OnLoadAction<LoggedInUser> action) {
         VolleySingleton volley = VolleySingleton.getInstance(context);
 
-        LoggedInUserData data = new LoggedInUserData();
-        JsonObjectRequest request = new JsonObjectRequest
-                (Request.Method.GET, url, null, new LoggedInUserListener(data), new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //TODO: Handle exception
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                (JSONObject response) -> {
+                    LoggedInUser user = null;
+                    JSONException e = null;
+                    try {
+                        user = loadJsonUser(response);
                     }
-                });
+                    catch (JSONException jsonException) {
+                        e = jsonException;
+                    }
+                    action.act(user, e);
+                }, (VolleyError error) -> {
 
-        LoggedInUser user = null;
-        boolean wait = true;
-        while (wait) {
-            try {
-                user = data.getUser();
-                wait = false;
-            }
-            catch (Exception e) {
-                //TODO: Handle exception
-            }
-        }
-        return user;
+                });
+    }
+
+    private LoggedInUser loadJsonUser(JSONObject response) throws JSONException {
+        String userId = response.getString("userId");
+        String displayName = response.getString("displayName");
+        return new LoggedInUser(userId, displayName);
     }
 }
