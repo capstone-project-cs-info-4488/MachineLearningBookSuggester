@@ -8,11 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import edu.isu.capstone.bookrec.android.data.model.Book;
+
 public class BookView extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_book_view);
         ((TextView)findViewById(R.id.txtDescription)).setText("This is a description");
         ((TextView)findViewById(R.id.txtTitle)).setText("This is a title");
@@ -30,9 +33,5 @@ public class BookView extends AppCompatActivity {
         Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
         startActivity(launchBrowser);
     }
+
 }
-//user clicks on book
-//book view is needed with book info
-//book object is created with info from the backend
-//book view is updated with bookobject info
-//display book view to user
