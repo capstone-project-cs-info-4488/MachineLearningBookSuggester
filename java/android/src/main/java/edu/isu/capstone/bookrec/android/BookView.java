@@ -31,3 +31,8 @@ public class BookView extends AppCompatActivity {
         startActivity(launchBrowser);
     }
 }
+//user clicks on book
+//book view is needed with book info
+//book object is created with info from the backend
+//book view is updated with bookobject info
+//display book view to user

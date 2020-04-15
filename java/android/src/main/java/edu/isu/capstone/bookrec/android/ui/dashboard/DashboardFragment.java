@@ -1,6 +1,7 @@
 package edu.isu.capstone.bookrec.android.ui.dashboard;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import edu.isu.capstone.bookrec.android.BookView;
 import edu.isu.capstone.bookrec.android.MainActivity;
 import edu.isu.capstone.bookrec.android.R;
 import edu.isu.capstone.bookrec.android.ui.BooksGridAdapter;
@@ -63,6 +65,15 @@ public class DashboardFragment extends Fragment {
             //url to load into image
             //TODO How to change url for each unique book? Load array with urls? Where do you get the urls?
             Picasso.get().load("https://i.imgur.com/aEggkZr.jpg").placeholder(R.mipmap.ic_launcher).into(img);
+            //https://stackoverflow.com/questions/1839273/how-to-apply-click-event-listener-to-image-in-android/1839454
+            img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //https://stackoverflow.com/questions/15478105/start-an-activity-from-a-fragment
+                    Intent intent = new Intent(getActivity(), BookView.class);
+                    startActivity(intent);
+                }
+            });
             //populate images array with imageviews
             images.add(img);
         }
