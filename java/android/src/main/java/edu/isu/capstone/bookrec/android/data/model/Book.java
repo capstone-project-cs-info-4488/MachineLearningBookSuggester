@@ -18,6 +18,16 @@ public class Book {
         this.image = image;
     }
 
+    // TODO: Connect to backend/database to get information about each book. Each backend method below is just a placeholder
+    //Constructor that creates Book given a PrimaryKey
+//    public Book(String primaryKey){
+//        this.bookId = backend.getID(primaryKey);
+//        this.title = backend.getTitle(primaryKey);
+//        this.image = backend.getURL(primaryKey);
+//        this.year = backend.getYear(primaryKey);
+//        this.authors = backend.getAuthors(primaryKey);
+//    }
+
     public String getBookId(){return bookId; }
     public String getTitle(){return title;}
     public int getYear(){return year;}
