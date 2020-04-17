@@ -8,11 +8,9 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 @RestController
 public class UserController {
-    private final Environment env;
     private final String APIKEY;
 
     public UserController(Environment env) {
-        this.env = env;
         APIKEY = env.getProperty("api.key");
     }
 
