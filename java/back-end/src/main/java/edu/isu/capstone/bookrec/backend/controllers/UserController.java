@@ -8,18 +8,20 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 @RestController
 public class UserController {
-    private Environment env;
+    private final Environment env;
+    private final String APIKEY;
 
     public UserController(Environment env) {
         this.env = env;
+        APIKEY = env.getProperty("api.key");
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/user/{id}/show")
     public String getUserById(@PathVariable Long id) {
         throw  new NotImplementedException();
     }
 
-    @GetMapping("/user/{username}")
+    @GetMapping("/user/{username}/show")
     public String getUserByUsername(@PathVariable String username) {
         throw  new NotImplementedException();
     }
@@ -28,7 +30,6 @@ public class UserController {
     public ResponseEntity<String> getUserBookshelf(@PathVariable String userId,
                                            @PathVariable String bookshelfId,
                                            RestTemplate restTemplate) {
-        String APIKEY = env.getProperty("api.key");
         final String URL = String.format("https://www.goodreads.com/review/list?id=%s&shelf=%s&key=%s&v=2",
                 userId, bookshelfId, APIKEY);
         return restTemplate.getForEntity(URL, String.class);
