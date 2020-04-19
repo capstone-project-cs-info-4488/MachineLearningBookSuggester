@@ -1,11 +1,10 @@
 package edu.isu.capstone.bookrec.android.ui.login;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.annotation.NonNull;
-
 import edu.isu.capstone.bookrec.android.data.LoginDataSource;
-import edu.isu.capstone.bookrec.android.data.LoginRepository;
+import edu.isu.capstone.bookrec.android.data.repositories.LoginRepository;
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.

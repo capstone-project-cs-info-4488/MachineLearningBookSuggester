@@ -14,4 +14,12 @@
     <string name="title_notifications">Notifications</string>
     <string name="recommendations">Recommendations</string>
     <string name="library">Library</string>
+    <string name="buttonImportGoodreadsTxt">Import</string>
+    <string name="btn_sign_in">Sign in</string>
+    <string name="btn_register">Register</string>
+    <string name="btn_main">Main</string>
+    <string name="download">Download</string>
+    <string name="picture_of_book">Picture of Book</string>
+    <string name="libravox_download">LibraVox Download</string>
+    <string name="book_description_title">Description</string>
 </resources>

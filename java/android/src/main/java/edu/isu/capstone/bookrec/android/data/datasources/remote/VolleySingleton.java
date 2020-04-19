@@ -1,27 +1,18 @@
-package edu.isu.capstone.bookrec.android.urlfetcher;
+package edu.isu.capstone.bookrec.android.data.datasources.remote;
 
 import android.content.Context;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
 // Reference Docs: https://developer.android.com/training/volley/requestqueue
 public class VolleySingleton {
-    private static VolleySingleton volleyInstance;
     private RequestQueue requestQueue;
-    private static Context context;
+    private Context context;
 
-    private VolleySingleton(Context ctx) {
+    public VolleySingleton(Context ctx) {
         context = ctx;
         requestQueue = getRequestQueue();
-    }
-
-    public static synchronized VolleySingleton getInstance(Context ctx) {
-        if (volleyInstance == null) {
-            volleyInstance = new VolleySingleton(ctx);
-        }
-        return volleyInstance;
     }
 
     public RequestQueue getRequestQueue() {

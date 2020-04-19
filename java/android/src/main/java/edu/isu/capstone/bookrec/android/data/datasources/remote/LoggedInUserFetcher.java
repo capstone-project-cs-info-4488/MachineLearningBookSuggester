@@ -1,29 +1,24 @@
-package edu.isu.capstone.bookrec.android.urlfetcher;
+package edu.isu.capstone.bookrec.android.data.datasources.remote;
 
 import android.content.Context;
-
 import com.android.volley.Request;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-
+import edu.isu.capstone.bookrec.android.data.model.LoggedInUser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import edu.isu.capstone.bookrec.android.data.model.LoggedInUser;
-
 public class LoggedInUserFetcher {
+    private final VolleySingleton volley;
     private Context context;
     private String url;
 
-    public LoggedInUserFetcher(Context ctx, String url_to_fetch) {
-        context = ctx;
+    public LoggedInUserFetcher(VolleySingleton volley, String url_to_fetch) {
+        this.volley = volley;
         url = url_to_fetch;
     }
 
     public void getUser(OnLoadAction<LoggedInUser> action) {
-        VolleySingleton volley = VolleySingleton.getInstance(context);
-
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,

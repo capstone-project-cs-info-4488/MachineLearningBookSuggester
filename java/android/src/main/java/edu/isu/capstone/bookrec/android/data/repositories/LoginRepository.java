@@ -1,5 +1,7 @@
-package edu.isu.capstone.bookrec.android.data;
+package edu.isu.capstone.bookrec.android.data.repositories;
 
+import edu.isu.capstone.bookrec.android.data.LoginDataSource;
+import edu.isu.capstone.bookrec.android.data.Result;
 import edu.isu.capstone.bookrec.android.data.model.LoggedInUser;
 
 /**
