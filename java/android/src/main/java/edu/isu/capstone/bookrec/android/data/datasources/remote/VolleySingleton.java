@@ -5,7 +5,10 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+import javax.inject.Singleton;
+
 // Reference Docs: https://developer.android.com/training/volley/requestqueue
+@Singleton
 public class VolleySingleton {
     private RequestQueue requestQueue;
     private Context context;
