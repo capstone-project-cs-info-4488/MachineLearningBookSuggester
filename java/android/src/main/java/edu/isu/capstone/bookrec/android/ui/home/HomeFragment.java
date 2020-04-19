@@ -16,8 +16,8 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        CreateLibraryImages(root);
-        CreateRecImages(root);
+        createLibraryImages(root);
+        createRecImages(root);
         //This is the linear layout for the library scrollview
 
         //ImageView img = root.findViewById(R.id.imageView);
@@ -27,14 +27,15 @@ public class HomeFragment extends Fragment {
     }
 
     //Populates the Library Linear Layout with images pulled from URL's
-    private void CreateLibraryImages(View root){
+    private void createLibraryImages(View root) {
         LinearLayout lib = root.findViewById(R.id.llLibrary);
         //numBooks will need to reflect how many books are in the user's library
         int numBooksLib = 10;
         TemporaryImagePopulatorTODO.populateBookImages(getActivity(), lib::addView, numBooksLib);
     }
+
     //Populates the recommendations linear layout with images pulled from URL's
-    private void CreateRecImages(View root){
+    private void createRecImages(View root) {
         LinearLayout rec = root.findViewById(R.id.llRecomendations);
         //numBooks will need to reflect how many books are in the user's recommendations
         int numBooksRec = 10;

@@ -1,13 +1,13 @@
 package edu.isu.capstone.bookrec.android.ui;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import androidx.core.util.Consumer;
+import androidx.navigation.Navigation;
 import com.squareup.picasso.Picasso;
 import edu.isu.capstone.bookrec.android.R;
-import edu.isu.capstone.bookrec.android.ui.book.BookActivity;
+import edu.isu.capstone.bookrec.android.ui.home.HomeFragmentDirections;
 
 public class TemporaryImagePopulatorTODO {
     public static void populateBookImages(Activity activity, Consumer<ImageView> images, int numBooksLib) {
@@ -27,9 +27,7 @@ public class TemporaryImagePopulatorTODO {
             //https://stackoverflow.com/questions/1839273/how-to-apply-click-event-listener-to-image-in-android/1839454
             img.setOnClickListener(v -> {
                 //https://stackoverflow.com/questions/15478105/start-an-activity-from-a-fragment
-                Intent intent = new Intent(activity, BookActivity.class);
-                intent.putExtra("bookId", "1234");
-                activity.startActivity(intent);
+                Navigation.findNavController(v).navigate(HomeFragmentDirections.actionHomeFragmentToBookActivity("1234"));
             });
             //populate images array with image views
             images.accept(img);

@@ -1,5 +1,6 @@
 package edu.isu.capstone.bookrec.android.ui.book;
 
+import android.net.Uri;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -21,6 +22,7 @@ public class BookActivityViewModel extends ViewModel {
     private final LiveData<String> title;
     private final LiveData<List<String>> authors;
     private final LiveData<Integer> yearPublished;
+    private final LiveData<Uri> imgUri;
 
     @Inject
     public BookActivityViewModel(BookRepository bookRepository) {
@@ -31,6 +33,8 @@ public class BookActivityViewModel extends ViewModel {
         title = map(book, Book::getTitle);
         authors = map(book, Book::getAuthors);
         yearPublished = map(book, Book::getYear);
+        imgUri = map(book, Book::getImage);
+
     }
 
     public void setBookId(String id) {
@@ -57,5 +61,9 @@ public class BookActivityViewModel extends ViewModel {
 
     public LiveData<Integer> getYearPublished() {
         return yearPublished;
+    }
+
+    public LiveData<Uri> getImgUri() {
+        return imgUri;
     }
 }

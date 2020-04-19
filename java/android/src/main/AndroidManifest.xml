@@ -18,7 +18,6 @@
         android:fullBackupContent="@xml/backup_descriptor"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".ui.book.BookActivity" />
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/title_activity_main"

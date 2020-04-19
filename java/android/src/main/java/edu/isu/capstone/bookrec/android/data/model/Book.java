@@ -1,6 +1,7 @@
 package edu.isu.capstone.bookrec.android.data.model;
 
-import java.net.URL;
+import android.net.Uri;
+
 import java.util.List;
 
 public class Book {
@@ -8,10 +9,10 @@ public class Book {
     private final String title;
     private final int year;
     private final List<String> authors;
-    private final URL image;
+    private final Uri image;
     private final String description;
 
-    public Book(String bookId, String title, int year, List<String> authors, URL image, String description) {
+    public Book(String bookId, String title, int year, List<String> authors, Uri image, String description) {
         this.bookId = bookId;
         this.title = title;
         this.year = year;
@@ -36,7 +37,7 @@ public class Book {
         return authors;
     }
 
-    public URL getImage() {
+    public Uri getImage() {
         return image;
     }
 

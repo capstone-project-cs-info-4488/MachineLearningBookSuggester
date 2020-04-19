@@ -1,4 +1,4 @@
-package edu.isu.capstone.bookrec.android.di;
+package edu.isu.capstone.bookrec.android.di.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
@@ -8,6 +8,7 @@ import dagger.multibindings.IntoMap;
 import edu.isu.capstone.bookrec.android.ui.book.BookActivityViewModel;
 
 @Module
+public
 interface ViewModelModule {
     @Binds
     ViewModelProvider.Factory bindViewModelFactory(ViewModelFactory factory);

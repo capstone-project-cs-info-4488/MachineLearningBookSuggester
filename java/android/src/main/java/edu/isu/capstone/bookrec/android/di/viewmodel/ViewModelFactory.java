@@ -1,4 +1,4 @@
-package edu.isu.capstone.bookrec.android.di;
+package edu.isu.capstone.bookrec.android.di.viewmodel;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;

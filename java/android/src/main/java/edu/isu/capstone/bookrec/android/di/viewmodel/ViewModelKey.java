@@ -1,4 +1,4 @@
-package edu.isu.capstone.bookrec.android.di;
+package edu.isu.capstone.bookrec.android.di.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 import dagger.MapKey;

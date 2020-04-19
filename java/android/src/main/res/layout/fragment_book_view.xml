@@ -4,8 +4,13 @@
     <data>
 
         <variable
+            name="handler"
+            type="edu.isu.capstone.bookrec.android.ui.book.BookEventHandler" />
+
+        <variable
             name="viewModel"
             type="edu.isu.capstone.bookrec.android.ui.book.BookActivityViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -93,7 +98,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:onClick="btnDownload"
+            android:onClick="@{handler::onDownloadLibraVox}"
             android:text="@string/download"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtLibraVoxTitle" />

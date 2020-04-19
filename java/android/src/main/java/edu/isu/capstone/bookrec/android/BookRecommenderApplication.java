@@ -7,6 +7,6 @@ import edu.isu.capstone.bookrec.android.di.DaggerApplicationComponent;
 public class BookRecommenderApplication extends DaggerApplication {
     @Override
     protected AndroidInjector<BookRecommenderApplication> applicationInjector() {
-        return DaggerApplicationComponent.create();
+        return DaggerApplicationComponent.factory().create(this);
     }
 }
