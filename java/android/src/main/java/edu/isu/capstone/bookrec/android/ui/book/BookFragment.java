@@ -5,18 +5,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
+
 import com.squareup.picasso.Picasso;
+
+import javax.inject.Inject;
+
 import dagger.android.support.DaggerFragment;
 import edu.isu.capstone.bookrec.android.R;
 import edu.isu.capstone.bookrec.android.databinding.FragmentBookViewBinding;
 
-import javax.inject.Inject;
-
 public class BookFragment extends DaggerFragment {
+    // Used to create the view model
     @Inject
     ViewModelProvider.Factory viewModelFactory;
     @Inject

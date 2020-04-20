@@ -12,13 +12,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
 import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+
+import javax.inject.Inject;
+
+import dagger.android.support.DaggerAppCompatActivity;
 import edu.isu.capstone.bookrec.android.R;
 import edu.isu.capstone.bookrec.android.ui.MainActivity;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends DaggerAppCompatActivity {
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
 
     private LoginViewModel loginViewModel;
 
@@ -27,8 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
-                .get(LoginViewModel.class);
+        loginViewModel = new ViewModelProvider(this, viewModelFactory).get(LoginViewModel.class);
 
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);

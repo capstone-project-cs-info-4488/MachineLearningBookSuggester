@@ -1,18 +1,24 @@
 package edu.isu.capstone.bookrec.android.data.repositories;
 
 import android.net.Uri;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
+import java.util.Collections;
+
+import javax.inject.Inject;
+
 import edu.isu.capstone.bookrec.android.data.Result;
 import edu.isu.capstone.bookrec.android.data.model.Book;
 
-import javax.inject.Inject;
-import java.util.Collections;
-
-
-public class DefaultBookRepository implements BookRepository {
+/**
+ * TODO
+ * Temporary repository that just returns DummyData
+ */
+public class DummyBookRepository implements BookRepository {
     @Inject
-    public DefaultBookRepository() {
+    DummyBookRepository() {
     }
 
     @Override
