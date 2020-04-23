@@ -1,6 +1,9 @@
 package edu.isu.capstone.bookrec.android.di;
 
 import android.app.Application;
+
+import javax.inject.Singleton;
+
 import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.AndroidInjector;
@@ -8,8 +11,6 @@ import dagger.android.support.AndroidSupportInjectionModule;
 import edu.isu.capstone.bookrec.android.BookRecommenderApplication;
 import edu.isu.capstone.bookrec.android.di.activities.ActivitiesModule;
 import edu.isu.capstone.bookrec.android.di.viewmodel.ViewModelModule;
-
-import javax.inject.Singleton;
 
 @Singleton
 @Component(modules = {
@@ -19,7 +20,8 @@ import javax.inject.Singleton;
         DataModule.class,
         VolleyModule.class,
         PicassoModule.class,
-        ApplicationModule.class
+        ApplicationModule.class,
+        RetrofitModule.class
 })
 public interface ApplicationComponent extends AndroidInjector<BookRecommenderApplication> {
     @Component.Factory

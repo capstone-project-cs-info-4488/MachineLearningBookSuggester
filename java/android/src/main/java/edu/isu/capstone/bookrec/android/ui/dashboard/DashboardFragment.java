@@ -8,16 +8,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import java.util.ArrayList;
+import java.util.Objects;
+
 import edu.isu.capstone.bookrec.android.R;
 import edu.isu.capstone.bookrec.android.ui.BooksGridAdapter;
 import edu.isu.capstone.bookrec.android.ui.MainActivity;
 import edu.isu.capstone.bookrec.android.ui.TemporaryImagePopulatorTODO;
-
-import java.util.ArrayList;
-import java.util.Objects;
 
 public class DashboardFragment extends Fragment {
 
@@ -32,7 +34,7 @@ public class DashboardFragment extends Fragment {
         //Sets Title
         Objects.requireNonNull(((MainActivity) requireActivity()).getSupportActionBar()).setTitle("My Library");
         //Creates an array list of images to be used to fill the grid.
-        CreateLibraryImages(root);
+        createLibraryImages(root);
 
         return root;
     }
@@ -50,7 +52,7 @@ public class DashboardFragment extends Fragment {
     }
 
     //Populates an array list of image views to be used to populate the library grid
-    private void CreateLibraryImages(View root) {
+    private void createLibraryImages(View root) {
         //TODO numBooks will need to reflect how many books are in the user's library
         int numBooksLib = 10;
 

@@ -3,55 +3,70 @@ package edu.isu.capstone.bookrec.android.ui.login;
 import android.util.Patterns;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import javax.inject.Inject;
 
-import edu.isu.capstone.bookrec.android.R;
 import edu.isu.capstone.bookrec.android.data.Result;
 import edu.isu.capstone.bookrec.android.data.model.LoggedInUser;
 import edu.isu.capstone.bookrec.android.data.repositories.LoginRepository;
 
-public class LoginViewModel extends ViewModel {
+import static androidx.lifecycle.Transformations.map;
+import static androidx.lifecycle.Transformations.switchMap;
+import static edu.isu.capstone.bookrec.android.util.LiveDataUtil.combine2;
+import static edu.isu.capstone.bookrec.android.util.LiveDataUtil.mapMutable;
+import static edu.isu.capstone.bookrec.android.util.LiveDataUtil.mergeFirstInto;
 
-    private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
-    private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
+public class LoginViewModel extends ViewModel {
+    private final MutableLiveData<String> username = new MutableLiveData<>();
+    private final MutableLiveData<String> password = new MutableLiveData<>();
+    private final LiveData<Boolean> usernameError = map(username, u -> !isUserNameValid(u));
+    private final LiveData<Boolean> passwordError = map(password, p -> !isPasswordValid(p));
+    private final LiveData<Boolean> isValid = combine2(usernameError, passwordError, (u, p) -> !u && !p);
+    private final MediatorLiveData<Result<LoggedInUser>> loginResult = new MediatorLiveData<>();
+    private final MutableLiveData<Boolean> loggingInUser = mapMutable(loginResult, result -> false);
+    private final LiveData<Boolean> loginError = map(loginResult, result -> result instanceof Result.Error);
+    private final LiveData<LoggedInUser> loggedIn = switchMap(loginResult, Result::successLiveData);
+
     private LoginRepository loginRepository;
 
     @Inject
     LoginViewModel(LoginRepository loginRepository) {
         this.loginRepository = loginRepository;
+        username.setValue("");
+        password.setValue("");
     }
 
-    LiveData<LoginFormState> getLoginFormState() {
-        return loginFormState;
+    LiveData<Boolean> getUsernameError() {
+        return usernameError;
     }
 
-    LiveData<LoginResult> getLoginResult() {
-        return loginResult;
+    LiveData<Boolean> getPasswordError() {
+        return passwordError;
     }
 
-    public void login(String username, String password) {
-        // can be launched in a separate asynchronous job
-        Result<LoggedInUser> result = loginRepository.login(username, password);
-
-        if (result instanceof Result.Success) {
-            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
-        } else {
-            loginResult.setValue(new LoginResult(R.string.login_failed));
-        }
+    LiveData<Boolean> getLoginError() {
+        return loginError;
     }
 
-    public void loginDataChanged(String username, String password) {
-        if (!isUserNameValid(username)) {
-            loginFormState.setValue(new LoginFormState(R.string.invalid_username, null));
-        } else if (!isPasswordValid(password)) {
-            loginFormState.setValue(new LoginFormState(null, R.string.invalid_password));
-        } else {
-            loginFormState.setValue(new LoginFormState(true));
-        }
+    public LiveData<Boolean> getIsValid() {
+        return isValid;
+    }
+
+    public LiveData<Boolean> getLoggingInUser() {
+        return loggingInUser;
+    }
+
+    LiveData<LoggedInUser> getLoggedIn() {
+        return loggedIn;
+    }
+
+    public void login() {
+        loggingInUser.setValue(true);
+        LiveData<Result<LoggedInUser>> result = loginRepository.login(username.getValue(), password.getValue());
+        mergeFirstInto(loginResult, result);
     }
 
     // A placeholder username validation check
@@ -69,5 +84,13 @@ public class LoginViewModel extends ViewModel {
     // A placeholder password validation check
     private boolean isPasswordValid(String password) {
         return password != null && password.trim().length() > 5;
+    }
+
+    public MutableLiveData<String> getUsername() {
+        return username;
+    }
+
+    public MutableLiveData<String> getPassword() {
+        return password;
     }
 }

@@ -19,13 +19,13 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
         <activity
-            android:name=".ui.MainActivity"
-            android:label="@string/title_activity_main"
-            android:parentActivityName=".ui.login.LoginActivity"
+            android:name=".ui.login.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:parentActivityName=".ui.MainActivity"
             tools:ignore="UnusedAttribute" />
         <activity
-            android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login">
+            android:name=".ui.MainActivity"
+            android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

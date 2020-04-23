@@ -4,6 +4,8 @@ import android.net.Uri;
 
 import java.util.List;
 
+import edu.isu.capstone.bookrec.android.util.ObjectUtil;
+
 public class Book {
     private final String bookId;
     private final String title;
@@ -43,6 +45,24 @@ public class Book {
 
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return year == book.year &&
+                ObjectUtil.equals(bookId, book.bookId) &&
+                ObjectUtil.equals(title, book.title) &&
+                ObjectUtil.equals(authors, book.authors) &&
+                ObjectUtil.equals(image, book.image) &&
+                ObjectUtil.equals(description, book.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return ObjectUtil.hash(bookId, title, year, authors, image, description);
     }
 }
 
