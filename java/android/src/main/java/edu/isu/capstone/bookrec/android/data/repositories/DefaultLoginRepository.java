@@ -1,5 +1,8 @@
 package edu.isu.capstone.bookrec.android.data.repositories;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -20,7 +23,7 @@ public class DefaultLoginRepository implements LoginRepository {
     private LoggedInUser user = null;
 
     @Inject
-    public DefaultLoginRepository(DummyLoginDataSource dataSource) {
+    DefaultLoginRepository(DummyLoginDataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -42,12 +45,14 @@ public class DefaultLoginRepository implements LoginRepository {
     }
 
     @Override
-    public Result<LoggedInUser> login(String username, String password) {
+    public LiveData<Result<LoggedInUser>> login(String username, String password) {
         // handle login
+        MutableLiveData<Result<LoggedInUser>> liveData = new MutableLiveData<>();
         Result<LoggedInUser> result = dataSource.login(username, password);
         if (result instanceof Result.Success) {
             setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
         }
-        return result;
+        liveData.setValue(result);
+        return liveData;
     }
 }

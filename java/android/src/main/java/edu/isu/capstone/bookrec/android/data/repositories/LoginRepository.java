@@ -1,5 +1,7 @@
 package edu.isu.capstone.bookrec.android.data.repositories;
 
+import androidx.lifecycle.LiveData;
+
 import edu.isu.capstone.bookrec.android.data.Result;
 import edu.isu.capstone.bookrec.android.data.model.LoggedInUser;
 
@@ -8,5 +10,5 @@ public interface LoginRepository {
 
     void logout();
 
-    Result<LoggedInUser> login(String username, String password);
+    LiveData<Result<LoggedInUser>> login(String username, String password);
 }
