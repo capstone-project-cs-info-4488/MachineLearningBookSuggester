@@ -1,15 +1,12 @@
-package edu.isu.capstone.bookrec.android.urlfetcher;
+package edu.isu.capstone.bookrec.android.data.datasources.remote;
 
-import android.content.Context;
-
+import edu.isu.capstone.bookrec.android.data.model.Book;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import edu.isu.capstone.bookrec.android.data.model.Book;
-
 public class BookFetcher extends Fetcher<Book> {
-    public BookFetcher(Context ctx, String url_to_fetch) {
-        super(ctx, url_to_fetch);
+    public BookFetcher(VolleySingleton volley, String url_to_fetch) {
+        super(volley, url_to_fetch);
     }
 
     protected Book load(JSONObject from) throws JSONException {

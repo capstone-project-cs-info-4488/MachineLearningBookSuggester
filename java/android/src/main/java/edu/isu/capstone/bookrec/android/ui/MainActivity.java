@@ -1,16 +1,15 @@
-package edu.isu.capstone.bookrec.android;
+package edu.isu.capstone.bookrec.android.ui;
 
 import android.os.Bundle;
-import android.widget.LinearLayout;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import dagger.android.support.DaggerAppCompatActivity;
+import edu.isu.capstone.bookrec.android.R;
 
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends DaggerAppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +24,5 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-        LinearLayout layout = findViewById(R.id.llLibrary);
-
     }
-
 }

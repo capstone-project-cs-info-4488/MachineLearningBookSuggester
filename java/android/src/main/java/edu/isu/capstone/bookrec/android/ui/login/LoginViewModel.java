@@ -1,14 +1,17 @@
 package edu.isu.capstone.bookrec.android.ui.login;
 
+import android.util.Patterns;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import android.util.Patterns;
 
-import edu.isu.capstone.bookrec.android.data.LoginRepository;
+import javax.inject.Inject;
+
+import edu.isu.capstone.bookrec.android.R;
 import edu.isu.capstone.bookrec.android.data.Result;
 import edu.isu.capstone.bookrec.android.data.model.LoggedInUser;
-import edu.isu.capstone.bookrec.android.R;
+import edu.isu.capstone.bookrec.android.data.repositories.LoginRepository;
 
 public class LoginViewModel extends ViewModel {
 
@@ -16,6 +19,7 @@ public class LoginViewModel extends ViewModel {
     private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
     private LoginRepository loginRepository;
 
+    @Inject
     LoginViewModel(LoginRepository loginRepository) {
         this.loginRepository = loginRepository;
     }
