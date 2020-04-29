@@ -2,6 +2,7 @@ package edu.isu.capstone.bookrec.android.interceptors;
 
 import java.io.IOException;
 
+import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -14,18 +15,15 @@ public class DeveloperKeyInterceptor implements Interceptor {
     @Override public Response intercept(Interceptor.Chain chain) throws IOException {
         Request request = chain.request();
 
-        request.url().newBuilder().addEncodedQueryParameter(DEVELOPER_KEY_KEY, DEVELOPER_KEY);
-
-        Response response = chain.proceed(request);
-        return response;
-    }
-
-    public static OkHttpClient build_client() {
-        // Using addinterceptor rather than addnetworkinterceptor because the adjusted url should
-        // already be included on redirects.
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(new DeveloperKeyInterceptor())
+        HttpUrl modifiedUrl = request.url().newBuilder()
+                .addEncodedQueryParameter(DEVELOPER_KEY_KEY, DEVELOPER_KEY)
                 .build();
-        return client;
+
+        Request modifiedRequest = request.newBuilder()
+                .url(modifiedUrl)
+                .build();
+
+        Response response = chain.proceed(modifiedRequest);
+        return response;
     }
 }
