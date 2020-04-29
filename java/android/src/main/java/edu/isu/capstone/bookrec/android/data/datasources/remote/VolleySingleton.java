@@ -1,4 +1,4 @@
-package edu.isu.capstone.bookrec.android.urlfetcher;
+package edu.isu.capstone.bookrec.android.data.datasources.remote;
 
 import android.content.Context;
 
@@ -6,25 +6,22 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-// Reference Docs: https://developer.android.com/training/volley/requestqueue
-public class VolleySingleton {
-    private static VolleySingleton volleyInstance;
-    private RequestQueue requestQueue;
-    private static Context context;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
-    private VolleySingleton(Context ctx) {
+// Reference Docs: https://developer.android.com/training/volley/requestqueue
+@Singleton
+public class VolleySingleton {
+    private RequestQueue requestQueue;
+    private Context context;
+
+    @Inject
+    VolleySingleton(Context ctx) {
         context = ctx;
         requestQueue = getRequestQueue();
     }
 
-    public static synchronized VolleySingleton getInstance(Context ctx) {
-        if (volleyInstance == null) {
-            volleyInstance = new VolleySingleton(ctx);
-        }
-        return volleyInstance;
-    }
-
-    public RequestQueue getRequestQueue() {
+    private RequestQueue getRequestQueue() {
         if (requestQueue == null) {
             // According to teh tutorial this is from:
             // getApplicationContext() is key, it keeps you from leaking the
