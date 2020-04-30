@@ -4,7 +4,6 @@ import dagger.Module;
 import dagger.Provides;
 import edu.isu.capstone.bookrec.android.data.datasources.remote.GoodreadsClient;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 
 @Module
