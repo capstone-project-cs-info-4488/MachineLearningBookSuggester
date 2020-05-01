@@ -11,4 +11,6 @@ public interface LoginRepository {
     void logout();
 
     LiveData<Result<LoggedInUser>> login(String username, String password);
+
+    String goodreadsId();
 }

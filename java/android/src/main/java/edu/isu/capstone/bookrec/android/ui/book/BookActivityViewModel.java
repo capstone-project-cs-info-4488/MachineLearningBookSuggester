@@ -1,15 +1,18 @@
 package edu.isu.capstone.bookrec.android.ui.book;
 
 import android.net.Uri;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
 import edu.isu.capstone.bookrec.android.data.Result;
 import edu.isu.capstone.bookrec.android.data.model.Book;
 import edu.isu.capstone.bookrec.android.data.repositories.BookRepository;
-
-import javax.inject.Inject;
-import java.util.List;
 
 import static androidx.lifecycle.Transformations.map;
 import static androidx.lifecycle.Transformations.switchMap;
@@ -17,7 +20,7 @@ import static androidx.lifecycle.Transformations.switchMap;
 public class BookActivityViewModel extends ViewModel {
     private final MutableLiveData<String> bookId = new MutableLiveData<>();
 
-    private final LiveData<Exception> error;
+    private final LiveData<Throwable> error;
     private final LiveData<String> description;
     private final LiveData<String> title;
     private final LiveData<List<String>> authors;
@@ -25,7 +28,7 @@ public class BookActivityViewModel extends ViewModel {
     private final LiveData<Uri> imgUri;
 
     @Inject
-    public BookActivityViewModel(BookRepository bookRepository) {
+    BookActivityViewModel(BookRepository bookRepository) {
         LiveData<Result<Book>> bookResult = switchMap(bookId, bookRepository::getBookById);
         error = switchMap(bookResult, Result::errorLiveData);
         LiveData<Book> book = switchMap(bookResult, Result::successLiveData);
@@ -43,7 +46,7 @@ public class BookActivityViewModel extends ViewModel {
         }
     }
 
-    public LiveData<Exception> getError() {
+    public LiveData<Throwable> getError() {
         return error;
     }
 

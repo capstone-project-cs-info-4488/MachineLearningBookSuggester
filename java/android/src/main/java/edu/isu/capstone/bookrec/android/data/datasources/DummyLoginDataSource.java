@@ -22,7 +22,7 @@ public class DummyLoginDataSource {
             LoggedInUser fakeUser =
                     new LoggedInUser(
                             UUID.randomUUID().toString(),
-                            "Jane Doe");
+                            username);
             return new Result.Success<>(fakeUser);
         } catch (Exception e) {
             return new Result.Error<>(new IOException("Error logging in", e));

@@ -7,6 +7,7 @@ import dagger.Binds;
 import dagger.Module;
 import dagger.multibindings.IntoMap;
 import edu.isu.capstone.bookrec.android.ui.book.BookActivityViewModel;
+import edu.isu.capstone.bookrec.android.ui.home.HomeViewModel;
 import edu.isu.capstone.bookrec.android.ui.login.LoginViewModel;
 
 @Module
@@ -24,4 +25,9 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(LoginViewModel.class)
     ViewModel loginViewModel(LoginViewModel model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HomeViewModel.class)
+    ViewModel homeViewModel(HomeViewModel model);
 }

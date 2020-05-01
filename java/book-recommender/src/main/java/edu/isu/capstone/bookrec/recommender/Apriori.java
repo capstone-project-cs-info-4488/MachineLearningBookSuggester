@@ -1,9 +1,21 @@
 package edu.isu.capstone.bookrec.recommender;
 
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static java.util.Collections.emptyList;
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 
 public class Apriori {
     /**
@@ -13,7 +25,7 @@ public class Apriori {
      * @param associations a set of association data
      * @param minFrequency the minimum amount of input sets the data must be in
      */
-    public static <T> Result<T> apriori(Collection<Set<T>> associations, int minFrequency) {
+    static <T> Result<T> apriori(Collection<Set<T>> associations, int minFrequency) {
         Map<List<T>, Long> matchingSubsets = new HashMap<>();
 
         List<List<T>> candidates = associations
@@ -165,7 +177,7 @@ public class Apriori {
     public static class Result<T> {
         private final Map<Set<T>, Integer> subsetToSupport;
 
-        public Result(Map<Set<T>, Integer> subsetToFrequency) {
+        Result(Map<Set<T>, Integer> subsetToFrequency) {
             this.subsetToSupport = subsetToFrequency;
         }
 
@@ -191,11 +203,11 @@ public class Apriori {
             return new Result<>(adjusted);
         }
 
-        public Set<Set<T>> getSubsetsFound() {
+        Set<Set<T>> getSubsetsFound() {
             return subsetToSupport.keySet();
         }
 
-        public Map<Set<T>, Integer> getSubsetToFrequency() {
+        Map<Set<T>, Integer> getSubsetToFrequency() {
             return subsetToSupport;
         }
     }

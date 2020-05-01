@@ -8,8 +8,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import edu.isu.capstone.bookrec.android.data.Result;
 import edu.isu.capstone.bookrec.android.data.model.Book;
 import edu.isu.capstone.bookrec.android.data.repositories.BookRepository;
+
+import static androidx.lifecycle.Transformations.switchMap;
 
 public class HomeViewModel extends ViewModel {
     private LiveData<List<Book>> books;
@@ -20,7 +23,7 @@ public class HomeViewModel extends ViewModel {
     HomeViewModel(BookRepository bookRepository) {
         mText = new MutableLiveData<>();
         mText.setValue("This is home fragment");
-//        books = bookRepository.getBooks();
+        books = switchMap(bookRepository.getBooks(), Result::successLiveData);
     }
 
     public LiveData<String> getText() {

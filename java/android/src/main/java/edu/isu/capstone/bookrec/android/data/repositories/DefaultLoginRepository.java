@@ -55,4 +55,9 @@ public class DefaultLoginRepository implements LoginRepository {
         liveData.setValue(result);
         return liveData;
     }
+
+    @Override
+    public String goodreadsId() {
+        return "110231004";
+    }
 }
