@@ -11,6 +11,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import edu.isu.capstone.bookrec.android.data.Result;
+import edu.isu.capstone.bookrec.android.data.model.Author;
 import edu.isu.capstone.bookrec.android.data.model.Book;
 
 /**
@@ -21,7 +22,7 @@ public class DummyBookRepository implements BookRepository {
     private List<Book> books = Collections.singletonList(new Book("1234",
             "This is a title. Book id " + 1234,
             1998,
-            Collections.singletonList("Katie Bailey"),
+            Collections.singletonList(new Author("Katie Bailey")),
             Uri.parse("https://i.imgur.com/aEggkZr.jpg"),
             "This is a description"
     ));

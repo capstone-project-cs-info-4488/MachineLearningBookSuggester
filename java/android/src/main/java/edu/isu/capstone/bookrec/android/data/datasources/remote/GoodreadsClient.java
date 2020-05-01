@@ -10,6 +10,7 @@ import edu.isu.capstone.bookrec.android.data.model.LoggedInUser;
 import edu.isu.capstone.bookrec.android.data.model.Reviews;
 import edu.isu.capstone.bookrec.android.data.model.Shelf;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface GoodreadsClient {
@@ -23,9 +24,8 @@ public interface GoodreadsClient {
     @GET("/user/show")
     LiveData<Result<LoggedInUser>> getGoodreadsUser(@Query("user_id") int userId);
 
-    @GET("/review/list")
+    @GET("/review/list/{id}.xml?v=2")
     LiveData<Result<Reviews>> getBooks(
-            @Query("v") int version,
-            @Query("id") String userId
+            @Path("id") String userId
     );
 }

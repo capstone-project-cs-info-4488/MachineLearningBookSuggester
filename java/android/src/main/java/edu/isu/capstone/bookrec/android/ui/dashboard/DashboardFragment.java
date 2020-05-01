@@ -33,6 +33,7 @@ public class DashboardFragment extends DaggerFragment {
         FragmentDashboardBinding binding = FragmentDashboardBinding.inflate(inflater);
         binding.setViewModel(viewModel);
         binding.booksView.setAdapter(new BookPreviewsAdapter(viewModel, picasso));
+        binding.setLifecycleOwner(getViewLifecycleOwner());
 
         return binding.getRoot();
     }

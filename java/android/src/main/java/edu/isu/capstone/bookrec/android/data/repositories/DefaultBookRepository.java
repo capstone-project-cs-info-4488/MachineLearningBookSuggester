@@ -34,7 +34,7 @@ public class DefaultBookRepository implements BookRepository {
     @Override
     public LiveData<Result<List<Book>>> getBooks() {
         String goodReadsId = login.goodreadsId();
-        return mapSuccess(goodreads.getBooks(2, goodReadsId), reviews -> {
+        return mapSuccess(goodreads.getBooks(goodReadsId), reviews -> {
             List<Book> result = new ArrayList<>();
             for (Review review : reviews.reviews) {
                 result.add(review.book);

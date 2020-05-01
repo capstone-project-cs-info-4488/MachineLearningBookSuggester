@@ -15,9 +15,9 @@ import edu.isu.capstone.bookrec.android.data.repositories.BookRepository;
 import static androidx.lifecycle.Transformations.switchMap;
 
 public class HomeViewModel extends ViewModel {
-    private LiveData<List<Book>> books;
-    private MutableLiveData<String> mText;
-    private MutableLiveData<String> openBookEvents = new MutableLiveData<>();
+    private final LiveData<List<Book>> books;
+    private final MutableLiveData<String> mText;
+    private final MutableLiveData<String> openBookEvents = new MutableLiveData<>();
 
     @Inject
     HomeViewModel(BookRepository bookRepository) {

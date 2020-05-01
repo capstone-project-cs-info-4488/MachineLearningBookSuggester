@@ -2,19 +2,45 @@ package edu.isu.capstone.bookrec.android.data.model;
 
 import android.net.Uri;
 
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.Root;
+import org.simpleframework.xml.convert.Convert;
+
 import java.util.List;
 
 import edu.isu.capstone.bookrec.android.util.ObjectUtil;
+import edu.isu.capstone.bookrec.android.util.SimpleXmlUriConverter;
 
+@Root
 public class Book {
+    @Element(name = "id")
     private final String bookId;
+
+    @Element(name = "title")
     private final String title;
+
+    @Element(name = "publication_year")
     private final int year;
-    private final List<String> authors;
+
+    @ElementList(name = "authors")
+    private final List<Author> authors;
+
+    @Element(name = "image_url")
+    @Convert(SimpleXmlUriConverter.class)
     private final Uri image;
+
+    @Element(name = "description")
     private final String description;
 
-    public Book(String bookId, String title, int year, List<String> authors, Uri image, String description) {
+    public Book(
+            @Element(name = "id") String bookId,
+            @Element(name = "title") String title,
+            @Element(name = "publication_year") int year,
+            @ElementList(name = "authors") List<Author> authors,
+            @Element(name = "image_url") @Convert(SimpleXmlUriConverter.class) Uri image,
+            @Element(name = "description") String description
+    ) {
         this.bookId = bookId;
         this.title = title;
         this.year = year;
@@ -35,7 +61,7 @@ public class Book {
         return year;
     }
 
-    public List<String> getAuthors() {
+    public List<Author> getAuthors() {
         return authors;
     }
 

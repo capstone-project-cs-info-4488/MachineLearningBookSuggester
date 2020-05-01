@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class BindingUtil {
+    @SuppressWarnings({"rawtypes", "unchecked"})
     @BindingAdapter("submitItems")
     public static <T> void submitItems(RecyclerView view, List<T> items) {
-        //noinspection unchecked
         ((ListAdapter) Objects.requireNonNull(view.getAdapter())).submitList(items);
     }
 }

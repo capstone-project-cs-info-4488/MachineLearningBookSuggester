@@ -6,11 +6,13 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import edu.isu.capstone.bookrec.android.data.Result;
+import edu.isu.capstone.bookrec.android.data.model.Author;
 import edu.isu.capstone.bookrec.android.data.model.Book;
 import edu.isu.capstone.bookrec.android.data.repositories.BookRepository;
 
@@ -34,7 +36,13 @@ public class BookActivityViewModel extends ViewModel {
         LiveData<Book> book = switchMap(bookResult, Result::successLiveData);
         description = map(book, Book::getDescription);
         title = map(book, Book::getTitle);
-        authors = map(book, Book::getAuthors);
+        authors = map(book, b -> {
+            List<String> authors = new ArrayList<>();
+            for (Author author : b.getAuthors()) {
+                authors.add(author.getName());
+            }
+            return authors;
+        });
         yearPublished = map(book, Book::getYear);
         imgUri = map(book, Book::getImage);
 

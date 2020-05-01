@@ -2,14 +2,20 @@ package edu.isu.capstone.bookrec.android.di;
 
 import com.squareup.moshi.Moshi;
 
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.convert.AnnotationStrategy;
+import org.simpleframework.xml.core.Persister;
+import org.simpleframework.xml.strategy.Strategy;
+
 import dagger.Module;
 import dagger.Provides;
 import edu.isu.capstone.bookrec.android.data.datasources.remote.GoodreadsClient;
 import edu.isu.capstone.bookrec.android.data.moshi.UriAdapter;
-import edu.isu.capstone.bookrec.android.util.LiveDataCallAdapterFactory;
 import edu.isu.capstone.bookrec.android.interceptors.DeveloperKeyInterceptor;
+import edu.isu.capstone.bookrec.android.util.LiveDataCallAdapterFactory;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.converter.moshi.MoshiConverterFactory;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 @Module
@@ -22,12 +28,21 @@ class RetrofitModule {
     }
 
     @Provides
-    Retrofit retrofit(Moshi moshi) {
+    Serializer serializer() {
+        Strategy strategy = new AnnotationStrategy();
+        return new Persister(strategy);
+    }
+
+    // Added deprecation suppress because it is kinda one of the very few xml libraries that works for android
+    @SuppressWarnings("deprecation")
+    @Provides
+    Retrofit retrofit(Moshi moshi, OkHttpClient client, Serializer serializer) {
         return new Retrofit.Builder()
                 .baseUrl("https://www.goodreads.com/")
                 .addCallAdapterFactory(new LiveDataCallAdapterFactory())
-                .addConverterFactory(SimpleXmlConverterFactory.create())
-//                .addConverterFactory(MoshiConverterFactory.create(moshi))
+                .addConverterFactory(SimpleXmlConverterFactory.createNonStrict(serializer))
+                .addConverterFactory(MoshiConverterFactory.create(moshi))
+                .client(client)
                 .build();
     }
 
@@ -37,12 +52,11 @@ class RetrofitModule {
     }
 
     @Provides
-    OkHttpClient build_client() {
+    OkHttpClient buildClient() {
         // Using addinterceptor rather than addnetworkinterceptor because the adjusted url should
         // already be included on redirects.
-        OkHttpClient client = new OkHttpClient.Builder()
+        return new OkHttpClient.Builder()
                 .addInterceptor(new DeveloperKeyInterceptor())
                 .build();
-        return client;
     }
 }

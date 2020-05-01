@@ -46,6 +46,14 @@ android {
         enabled = true
     }
 }
+configurations {
+    all.collect { config ->
+        config.exclude module: 'stax'
+        config.exclude module: 'stax-api'
+        //noinspection DuplicatePlatformClasses
+        config.exclude module: 'xpp3'
+    }
+}
 
 dependencies {
     api 'com.google.dagger:dagger:2.27'
@@ -76,4 +84,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.8.1'
     implementation 'com.squareup.retrofit2:converter-moshi:2.8.1'
     implementation 'com.squareup.retrofit2:converter-simplexml:2.8.1'
+    implementation('org.simpleframework:simple-xml:2.7.1') {
+        exclude module: 'stax'
+        exclude module: 'stax-api'
+        exclude module: 'xpp3'
+    }
 }

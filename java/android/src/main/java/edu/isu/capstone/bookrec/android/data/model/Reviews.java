@@ -1,12 +1,12 @@
 package edu.isu.capstone.bookrec.android.data.model;
 
-import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
 import java.util.List;
 
-@Root(name = "GoodreadsResponse")
+@Root(name = "GoodreadsResponse", strict = false)
 public class Reviews {
-    @Element
+    @ElementList
     public List<Review> reviews;
 }

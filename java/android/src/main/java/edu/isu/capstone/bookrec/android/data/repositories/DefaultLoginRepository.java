@@ -29,7 +29,7 @@ public class DefaultLoginRepository implements LoginRepository {
 
     @Override
     public boolean isLoggedIn() {
-        return user != null;
+        return true; //user != null;
     }
 
     @Override

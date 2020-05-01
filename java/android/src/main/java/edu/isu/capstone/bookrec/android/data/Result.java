@@ -32,7 +32,7 @@ public abstract class Result<T> {
 
     // Success sub-class
     public final static class Success<T> extends Result<T> {
-        private T data;
+        private final T data;
 
         public Success(T data) {
             this.data = data;
@@ -57,7 +57,7 @@ public abstract class Result<T> {
 
     // Error sub-class
     public final static class Error<T> extends Result<T> {
-        private Throwable error;
+        private final Throwable error;
 
         public Error(Throwable error) {
             this.error = error;
