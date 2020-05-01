@@ -11,13 +11,14 @@ import javax.inject.Inject;
 import edu.isu.capstone.bookrec.android.data.Result;
 import edu.isu.capstone.bookrec.android.data.model.Book;
 import edu.isu.capstone.bookrec.android.data.repositories.BookRepository;
+import edu.isu.capstone.bookrec.android.util.Event;
 
 import static androidx.lifecycle.Transformations.switchMap;
 
 public class HomeViewModel extends ViewModel {
     private final LiveData<List<Book>> books;
     private final MutableLiveData<String> mText;
-    private final MutableLiveData<String> openBookEvents = new MutableLiveData<>();
+    private final MutableLiveData<Event<String>> openBookEvents = new MutableLiveData<>();
 
     @Inject
     HomeViewModel(BookRepository bookRepository) {
@@ -34,11 +35,11 @@ public class HomeViewModel extends ViewModel {
         return books;
     }
 
-    public LiveData<String> getOpenBookEvents() {
+    public LiveData<Event<String>> getOpenBookEvents() {
         return openBookEvents;
     }
 
     public void openBook(String bookId) {
-        openBookEvents.setValue(bookId);
+        openBookEvents.setValue(new Event<>(bookId));
     }
 }

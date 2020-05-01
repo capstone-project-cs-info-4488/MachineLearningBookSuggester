@@ -28,7 +28,7 @@ public class DefaultBookRepository implements BookRepository {
     public LiveData<Result<Book>> getBookById(String bookId) {
         // Use goodreads client
         // put result into livedata.
-        return null;
+        return mapSuccess(goodreads.getGoodreadsBook(bookId), b -> b.book);
     }
 
     @Override

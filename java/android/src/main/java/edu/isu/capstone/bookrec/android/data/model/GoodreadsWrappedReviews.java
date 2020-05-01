@@ -6,7 +6,7 @@ import org.simpleframework.xml.Root;
 import java.util.List;
 
 @Root(name = "GoodreadsResponse", strict = false)
-public class Reviews {
+public class GoodreadsWrappedReviews {
     @ElementList
     public List<Review> reviews;
 }

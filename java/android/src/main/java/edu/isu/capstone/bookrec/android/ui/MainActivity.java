@@ -3,7 +3,6 @@ package edu.isu.capstone.bookrec.android.ui;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -22,6 +21,8 @@ public class MainActivity extends DaggerAppCompatActivity {
     @Inject
     LoginRepository loggedIn;
 
+    private AppBarConfiguration appBarConfiguration;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,17 +33,23 @@ public class MainActivity extends DaggerAppCompatActivity {
         }
 
         setContentView(R.layout.activity_main);
-
-        Toolbar toolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(findViewById(R.id.my_toolbar));
         BottomNavigationView navView = findViewById(R.id.nav_view);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.homeFragment, R.id.dashboardFragment, R.id.notificationsFragment)
+        appBarConfiguration = new AppBarConfiguration
+                .Builder(R.id.homeFragment, R.id.dashboardFragment, R.id.notificationsFragment)
                 .build();
-        setSupportActionBar(toolbar);
 //         Passing each menu ID as a set of Ids because each
 //         menu should be considered as top level destinations.
-//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-        NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        return NavigationUI.navigateUp(
+                Navigation.findNavController(this, R.id.nav_host_fragment),
+                appBarConfiguration
+        ) || super.onSupportNavigateUp();
     }
 }
